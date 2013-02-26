@@ -9,7 +9,7 @@ module LateJunction
   PRESENTERS = ['Fiona Talkington', 'Verity Sharp', 'Max Reinhardt',
                 'Nick Luscombe', 'Anne-Hilde Nesset']
 
-  INDEX = {
+  START_PAGES = {
     :legacy => 'http://www.bbc.co.uk/radio3/latejunction/pip/archive/',
     :current => 'http://www.bbc.co.uk/programmes/b006tp52/broadcasts',
   }
@@ -40,7 +40,7 @@ module LateJunction
   end
 
   def self.indices(source)
-    uri = INDEX[source]
+    uri ||= START_PAGES[source]
     page = html(uri)
 
     case source
