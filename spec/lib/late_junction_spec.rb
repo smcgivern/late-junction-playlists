@@ -3,6 +3,15 @@ require './lib/late_junction'
 
 require 'tmpdir'
 
+def with_const(constant, new)
+  previous = constant
+  constant[0..-1] = new
+
+  yield
+
+  constant[0..-1] = previous
+end
+
 describe 'LateJunction.absolute' do
   it 'should return a block for converting the href to an absolute URI' do
     absolute = LateJunction.absolute('http://www.bbc.co.uk')
@@ -25,13 +34,31 @@ describe 'LateJunction.cache_filename' do
 end
 
 describe 'LateJunction.html' do
-  it 'should look in the cache first' do
+  it 'should return the parsed HTML' do
+    with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+      LateJunction.html('pips').
+        should.be.a lambda {|x| x.class == Nokogiri::HTML::Document}
+    end
   end
 
-  it 'should return the parsed HTML' do
+  it 'should look in the cache first' do
+    with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+      LateJunction.html('pips').title.
+          should.equal 'BBC - (none) - Late Junction - Archive'
+    end
   end
 
   it 'should add the file contents to the cache' do
+    dir = Dir.mktmpdir
+
+    with_const(LateJunction::CACHE_DIRECTORY, dir) do
+      LateJunction.html('spec/fixture/pips')
+
+      File.exist?(File.join(dir, 'spec-fixture-pips')).
+          should.equal true
+    end
+
+    FileUtils.remove_entry_secure(dir)
   end
 end
 
