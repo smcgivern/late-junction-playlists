@@ -39,7 +39,7 @@ module LateJunction
   def self.tracks(text)
   end
 
-  def self.indices(source)
+  def self.indices(source, uri)
     uri ||= START_PAGES[source]
     page = html(uri)
 
