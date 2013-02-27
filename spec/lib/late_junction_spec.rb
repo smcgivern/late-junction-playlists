@@ -4,7 +4,7 @@ require './lib/late_junction'
 require 'tmpdir'
 
 def with_const(constant, new)
-  previous = constant
+  previous = constant.dup
   constant[0..-1] = new
 
   yield
