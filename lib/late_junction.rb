@@ -32,13 +32,6 @@ module LateJunction
     page
   end
 
-  def self.presenter(text)
-    text.match(/(#{PRESENTERS.join('|')})/).to_s
-  end
-
-  def self.tracks(text)
-  end
-
   def self.indices(source, uri)
     uri ||= START_PAGES[source]
     page = html(uri)
@@ -75,5 +68,13 @@ module LateJunction
       playlist[:presenter] = presenter(playlist[:description])
       playlist[:tracks] = tracks(page.at('#play-list').inner_text)
     end
+  end
+
+  def self.presenter(text)
+    text.match(/(#{PRESENTERS.join('|')})/).to_s
+  end
+
+  def self.tracks(text)
+
   end
 end
