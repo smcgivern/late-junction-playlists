@@ -62,6 +62,20 @@ describe 'LateJunction.html' do
   end
 end
 
+describe 'LateJunction.indices' do
+  with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+    it 'should find all episode indices on the page' do
+      LateJunction.indices(:legacy).length.
+        should.equal 5
+    end
+
+    it 'should use the URI passed, if any' do
+      LateJunction.indices(:legacy, 'http://www.bbc.co.uk/pips/').length.
+        should.equal 6
+    end
+  end
+end
+
 describe 'LateJunction.presenter' do
   it 'should return the first presenter found' do
     LateJunction.presenter('Max Reinhardt Fiona Talkington').

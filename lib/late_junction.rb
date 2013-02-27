@@ -32,7 +32,7 @@ module LateJunction
     page
   end
 
-  def self.indices(source, uri)
+  def self.indices(source, uri=nil)
     uri ||= START_PAGES[source]
     page = html(uri)
 
