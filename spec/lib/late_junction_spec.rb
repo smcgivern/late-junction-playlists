@@ -78,6 +78,23 @@ describe 'LateJunction.indices' do
   end
 end
 
+describe 'LateJunction.episodes' do
+  with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+    it 'should find all episodes on the pages passed' do
+      uris = [2004, 2005].map {|x| "http://www.bbc.co.uk/pips/#{x}/"}
+      episodes = LateJunction.episodes(:legacy, uris)
+
+      episodes.length.should.equal 286
+      episodes.first[-5..-1].should.equal 'uoj0a'
+    end
+
+    it 'should pull indices if no uris passed' do
+      LateJunction.episodes(:legacy).length.
+        should.equal 108
+    end
+  end
+end
+
 describe 'LateJunction.presenter' do
   it 'should return the first presenter found' do
     LateJunction.presenter('Max Reinhardt Fiona Talkington').
