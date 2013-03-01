@@ -90,7 +90,7 @@ describe 'LateJunction.episodes' do
 
     it 'should pull indices if no uris passed' do
       LateJunction.episodes(:legacy).length.
-        should.equal 108
+        should.equal 14
     end
   end
 end

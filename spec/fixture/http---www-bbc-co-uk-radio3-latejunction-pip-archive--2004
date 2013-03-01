@@ -54,13 +54,13 @@
 
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
 <!--[if IE]><![if gte IE 6]><![endif]--><style type="text/css">
-		@import '/includes/bbcpage/v3-3/toolbar.css';
-	</style>
+        @import '/includes/bbcpage/v3-3/toolbar.css';
+    </style>
 <!--[if IE]><![endif]><![endif]--><!--[if gte IE 6]>
-	<style type="text/css" media="screen">
-		#bbcpageExplore a {height:22px;}
-		#bbcpageMothball a {height:73px;}
-	</style>
+    <style type="text/css" media="screen">
+        #bbcpageExplore a {height:22px;}
+        #bbcpageMothball a {height:73px;}
+    </style>
 <![endif]--><script language="JavaScript" type="text/javascript">
 <!--
 function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=yes,width=350,height=400');}
@@ -121,8 +121,8 @@ function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=y
 
 
 <!-- pips content -->
-<div id="pips-archive">	  
-	  
+<div id="pips-archive">
+
 
 <a href="../../" class="link-brand-title"><div id="brand-title"><h1>Late Junction</h1></div>
 </a>
@@ -145,26 +145,26 @@ function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=y
 
 <a href="?2004">2004</a>
 
- |  
+ |
 
 
 <a href="?2005">2005</a>
 
- |  
+ |
 
 
 <a href="?2006">2006</a> |
 
 
 
- 
+
 
 
 <a href="?2007">2007</a>
 
  | <a href="?2008">2008</a>
 
- | 
+ |
 
 
 <a href="http://www.bbc.co.uk/programmes/b006tp52/episodes">AFTER AUG 2008</a>
@@ -173,7 +173,7 @@ function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=y
 </div>
 
 
-	<div class="month">
+    <div class="month">
 <p><a name="12"></a></p>
 <h3>December 2004</h3>
 <ul>
@@ -194,147 +194,6 @@ function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=y
 </ul>
 </div>
 
-	<div class="month">
-<p><a name="11"></a></p>
-<h3>November 2004</h3>
-<ul>
-<li><a href="../l1aar"> Monday 29</a></li>
-<li><a href="../s6sow"> Thursday 25</a></li>
-<li><a href="../4j1yr"> Wednesday 24</a></li>
-<li><a href="../qejxg"> Tuesday 23</a></li>
-<li><a href="../oy0zq"> Thursday 18</a></li>
-<li><a href="../scnww"> Wednesday 17</a></li>
-<li><a href="../newpd"> Tuesday 16</a></li>
-<li><a href="../z1kfc"> Monday 15</a></li>
-<li><a href="../wiwal"> Thursday 11</a></li>
-<li><a href="../71v7m"> Wednesday 10</a></li>
-<li><a href="../sp6fw"> Tuesday 9</a></li>
-<li><a href="../2ejnn"> Monday 8</a></li>
-<li><a href="../puk79"> Thursday 4</a></li>
-<li><a href="../ca7fp"> Wednesday 3</a></li>
-<li><a href="../71wxz"> Tuesday 2</a></li>
-<li><a href="../izoue"> Monday 1</a></li>
-</ul>
-</div>
-
-	<div class="month">
-<p><a name="10"></a></p>
-<h3>October 2004</h3>
-<ul>
-<li><a href="../dw1tv"> Thursday 28</a></li>
-<li><a href="../14a5b"> Wednesday 27</a></li>
-<li><a href="../4bgii"> Tuesday 26</a></li>
-<li><a href="../7y15d"> Monday 25</a></li>
-<li><a href="../dpq2j"> Thursday 21</a></li>
-<li><a href="../lfkir"> Wednesday 20</a></li>
-<li><a href="../0lrly"> Tuesday 19</a></li>
-<li><a href="../kmmc9"> Monday 18</a></li>
-<li><a href="../r04dy"> Thursday 14</a></li>
-<li><a href="../161zd"> Wednesday 13</a></li>
-<li><a href="../4inlw"> Tuesday 12</a></li>
-<li><a href="../7ixu1"> Monday 11</a></li>
-<li><a href="../p7fkn"> Thursday 7</a></li>
-<li><a href="../djxp0"> Wednesday 6</a></li>
-<li><a href="../hx003"> Tuesday 5</a></li>
-<li><a href="../qdz1s"> Monday 4</a></li>
-</ul>
-</div>
-
-	<div class="month">
-<p><a name="09"></a></p>
-<h3>September 2004</h3>
-<ul>
-<li><a href="../87jxu"> Thursday 30</a></li>
-<li><a href="../ui4cj"> Wednesday 29</a></li>
-<li><a href="../0z5kf"> Tuesday 28</a></li>
-<li><a href="../wz11j"> Monday 27</a></li>
-<li><a href="../5a5zy"> Thursday 23</a></li>
-<li><a href="../g88i8"> Wednesday 22</a></li>
-<li><a href="../qjj1e"> Tuesday 21</a></li>
-<li><a href="../b1ej4"> Monday 20</a></li>
-<li><a href="../dv9lk"> Thursday 16</a></li>
-<li><a href="../t97q0"> Wednesday 15</a></li>
-<li><a href="../ehnoe"> Tuesday 14</a></li>
-<li><a href="../9mcdx"> Monday 13</a></li>
-<li><a href="../64bf3"> Thursday 9</a></li>
-<li><a href="../zq3ac"> Tuesday 7</a></li>
-<li><a href="../9yyi5"> Monday 6</a></li>
-<li><a href="../1d82h"> Thursday 2</a></li>
-<li><a href="../bnvji"> Wednesday 1</a></li>
-</ul>
-</div>
-
-	<div class="month">
-<p><a name="08"></a></p>
-<h3>August 2004</h3>
-<ul>
-<li><a href="../0jyh6"> Tuesday 31</a></li>
-<li><a href="../nmvm5"> Monday 30</a></li>
-<li><a href="../1g3zo"> Thursday 26</a></li>
-<li><a href="../6kouf"> Tuesday 24</a></li>
-<li><a href="../rnqcx"> Thursday 19</a></li>
-<li><a href="../71fji"> Wednesday 18</a></li>
-<li><a href="../jgh8z"> Tuesday 17</a></li>
-<li><a href="../z16qz"> Monday 16</a></li>
-<li><a href="../ly1kg"> Thursday 12</a></li>
-<li><a href="../3ugsa"> Wednesday 11</a></li>
-<li><a href="../2dul1"> Tuesday 10</a></li>
-<li><a href="../ssrua"> Thursday 5</a></li>
-<li><a href="../14et6"> Wednesday 4</a></li>
-<li><a href="../j5wz9"> Monday 2</a></li>
-</ul>
-</div>
-
-	<div class="month">
-<p><a name="07"></a></p>
-<h3>July 2004</h3>
-<ul>
-<li><a href="../qsj0g"> Thursday 29</a></li>
-<li><a href="../k3kvs"> Tuesday 27</a></li>
-<li><a href="../wtlvu"> Monday 26</a></li>
-<li><a href="../gk728"> Thursday 22</a></li>
-<li><a href="../7xery"> Wednesday 21</a></li>
-<li><a href="../61o2a"> Tuesday 20</a></li>
-<li><a href="../emhz9"> Thursday 15</a></li>
-<li><a href="../k47cj"> Wednesday 14</a></li>
-<li><a href="../1ncxa"> Tuesday 13</a></li>
-<li><a href="../bdzva"> Monday 12</a></li>
-<li><a href="../pcwkv"> Friday 9</a></li>
-<li><a href="../kbht5"> Thursday 8</a></li>
-<li><a href="../a1ui0"> Wednesday 7</a></li>
-<li><a href="../4d2fo"> Tuesday 6</a></li>
-<li><a href="../eyosk"> Monday 5</a></li>
-<li><a href="../nw8n4"> Thursday 1</a></li>
-</ul>
-</div>
-
-	<div class="month">
-<p><a name="06"></a></p>
-<h3>June 2004</h3>
-<ul>
-<li><a href="../h18rx"> Wednesday 30</a></li>
-<li><a href="../d6t8j"> Tuesday 29</a></li>
-<li><a href="../ozndi"> Monday 28</a></li>
-<li><a href="../65gqu"> Thursday 24</a></li>
-<li><a href="../c5bjm"> Wednesday 23</a></li>
-<li><a href="../44sur"> Tuesday 22</a></li>
-<li><a href="../vg72d"> Monday 21</a></li>
-<li><a href="../fknsc"> Thursday 17</a></li>
-<li><a href="../w3sg5"> Wednesday 16</a></li>
-<li><a href="../anx8u"> Tuesday 15</a></li>
-<li><a href="../r22c2"> Monday 14</a></li>
-<li><a href="../106o3"> Thursday 10</a></li>
-<li><a href="../vyuk9"> Wednesday 9</a></li>
-<li><a href="../ekh4v"> Tuesday 8</a></li>
-<li><a href="../o0k00"> Monday 7</a></li>
-</ul>
-</div>
-
-	
-	
-	
-	
-	
 
 <div class="month-nav">JAN | FEB | MAR | APR | MAY | <a href="#06"><strong>JUN</strong></a> | <a href="#07"><strong>JUL</strong></a> | <a href="#08"><strong>AUG</strong></a> | <a href="#09"><strong>SEP</strong></a> | <a href="#10"><strong>OCT</strong></a> | <a href="#11"><strong>NOV</strong></a> | <a href="#12"><strong>DEC</strong></a>
 </div>
@@ -344,26 +203,26 @@ function popmailwin(x, y) {window.open(x,y,'status=no,scrollbars=yes,resizable=y
 
 <a href="?2004">2004</a>
 
- |  
+ |
 
 
 <a href="?2005">2005</a>
 
- |  
+ |
 
 
 <a href="?2006">2006</a> |
 
 
 
- 
+
 
 
 <a href="?2007">2007</a>
 
  | <a href="?2008">2008</a>
 
- | 
+ |
 
 
 <a href="http://www.bbc.co.uk/programmes/b006tp52/episodes">AFTER AUG 2008</a>
