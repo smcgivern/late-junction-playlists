@@ -32,6 +32,10 @@ module LateJunction
     page
   end
 
+  def self.html_to_text(html)
+    Nokogiri::HTML(html.inner_html.gsub(/<\/?(br|p).*?>/, "\n")).inner_text
+  end
+
   def self.indices(source, uri=nil)
     uri ||= START_PAGES[source]
     page = html(uri)
@@ -66,7 +70,7 @@ module LateJunction
       playlist[:title] = page.at('#episode-title').inner_text
       playlist[:description] = page.at('#episode-description').inner_text
       playlist[:presenter] = presenter(playlist[:description])
-      playlist[:tracks] = tracks(page.at('#play-list').inner_text)
+      playlist[:tracks] = tracks(html_to_text(page.at('#play-list')))
     end
   end
 
