@@ -123,3 +123,29 @@ describe 'LateJunction.presenter' do
       should.equal 'Fiona Talkington'
   end
 end
+
+describe 'LateJunction.tracks' do
+  before do
+    with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+      @pages = ['9eaog', '440gl'].
+        map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}/"}.
+        map {|x| LateJunction.html(x)}
+
+      @playlists = @pages.
+        map {|x| LateJunction.tracks(LateJunction.html_to_text(x.at('#play-list')))}
+    end
+  end
+
+  it 'should pull in as much track info as possible' do
+    silent_night = {
+      :time => '11:16',
+      :title => 'Silent Night',
+      :artists => ['Low'],
+      :album => 'Christmas',
+      :composer => 'Trad',
+    }
+
+    @playlists.first.length.should.equal 12
+    @playlists.first[7].should.equal silent_night
+  end
+end

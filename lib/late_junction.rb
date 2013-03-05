@@ -79,6 +79,29 @@ module LateJunction
   end
 
   def self.tracks(text)
+    parsed_tracks = []
 
+    text.reduce([[]]) do |groups, line|
+      (line.strip.empty?) ? groups << [] : groups.last << line.strip
+      groups
+    end.reject do |x|
+      x.empty?
+    end.each do |group|
+      next if group.length === 1
+
+      titles, composer = group[1].split(': ').reverse
+
+      titles.split(' / ').each do |title|
+        parsed_tracks << {
+          :time => group[0].gsub('.', ':'),
+          :composer => composer,
+          :title => title,
+          :artists => group[2].split(' / '),
+          :album => group[3].gsub('Taken from the album ', ''),
+        }
+      end
+    end
+
+    parsed_tracks
   end
 end
