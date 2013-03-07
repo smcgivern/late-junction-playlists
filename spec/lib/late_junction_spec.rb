@@ -146,7 +146,13 @@ describe 'LateJunction.tracks' do
       :composer => 'Trad',
     }
 
-    @playlists.first.length.should.equal 12
-    @playlists.first[-5].should.equal silent_night
+    @playlists[0].length.should.equal 13
+    @playlists[0][-5].should.equal silent_night
+  end
+
+  it 'should split tracks correctly' do
+    @playlists[1][6][:title].should.equal 'El Noi de la Mare'
+    @playlists[1][7][:title].should.equal 'El decembre congelat'
+    @playlists[1][6][:artist].should.equal @playlists.last[7][:artist]
   end
 end
