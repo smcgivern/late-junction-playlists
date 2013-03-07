@@ -146,6 +146,6 @@ describe 'LateJunction.tracks' do
     }
 
     @playlists.first.length.should.equal 12
-    @playlists.first[7].should.equal silent_night
+    @playlists.first[-5].should.equal silent_night
   end
 end
