@@ -132,7 +132,8 @@ describe 'LateJunction.tracks' do
         map {|x| LateJunction.html(x)}
 
       @playlists = @pages.
-        map {|x| LateJunction.tracks(LateJunction.html_to_text(x.at('#play-list')))}
+        map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
+        map {|x| LateJunction.tracks(x) }
     end
   end
 
