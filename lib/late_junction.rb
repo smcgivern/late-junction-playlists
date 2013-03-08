@@ -82,12 +82,17 @@ module LateJunction
     parsed_tracks = []
 
     text.reduce([[]]) do |groups, line|
-      (line.strip.empty?) ? groups << [] : groups.last << line.strip
+      stripped = line.gsub("\302\240", ' ').strip
+
+      stripped.empty? ? groups << [] : groups.last << stripped
       groups
     end.reject do |x|
       x.empty?
     end.each do |group|
       next if group.length === 1
+
+      # Fix lines that begin with a / by appending them to the previous line.
+      group = group.reduce([]) {|g, l| (l[0..0] == '/' ? g.last : g) << l; g}
 
       titles, composer = group[1].split(': ').reverse
 

@@ -146,7 +146,7 @@ describe 'LateJunction.tracks' do
       :composer => 'Trad',
     }
 
-    @playlists[0].length.should.equal 13
+    @playlists[0].length.should.equal 16
     @playlists[0][-5].should.equal silent_night
   end
 
@@ -154,5 +154,12 @@ describe 'LateJunction.tracks' do
     @playlists[1][6][:title].should.equal 'El Noi de la Mare'
     @playlists[1][7][:title].should.equal 'El decembre congelat'
     @playlists[1][6][:artists].should.equal @playlists.last[7][:artists]
+  end
+
+  it 'should fix broken lines' do
+    3.upto(9) do |i|
+      @playlists[0][i][:artists].
+        should.equal ['Susanna and the Magical Orchestra']
+    end
   end
 end
