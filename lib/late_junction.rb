@@ -91,12 +91,12 @@ module LateJunction
 
       titles, composer = group[1].split(': ').reverse
 
-      titles.split('/').map {|x| x.strip}.each do |title|
+      titles.split(/ *\/ */).each do |title|
         parsed_tracks << {
           :time => group[0].gsub('.', ':'),
           :composer => composer,
           :title => title,
-          :artists => group[2].split(' / '),
+          :artists => group[2].split(/ *\/ */),
           :album => group[3].gsub('Taken from the album ', ''),
         }
       end
