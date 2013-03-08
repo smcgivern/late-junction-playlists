@@ -94,7 +94,7 @@ module LateJunction
       # Fix lines that begin with a / by appending them to the previous line.
       group = group.reduce([]) {|g, l| (l[0..0] == '/' ? g.last : g) << l; g}
 
-      titles, composer = group[1].split(': ').reverse
+      titles, composer = group[1].split(/: */).reverse
 
       titles.split(/ *\/ */).each do |title|
         parsed_tracks << {
