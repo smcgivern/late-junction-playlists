@@ -153,6 +153,6 @@ describe 'LateJunction.tracks' do
   it 'should split tracks correctly' do
     @playlists[1][6][:title].should.equal 'El Noi de la Mare'
     @playlists[1][7][:title].should.equal 'El decembre congelat'
-    @playlists[1][6][:artist].should.equal @playlists.last[7][:artist]
+    @playlists[1][6][:artists].should.equal @playlists.last[7][:artists]
   end
 end
