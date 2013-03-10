@@ -84,10 +84,14 @@ end
 describe 'LateJunction.indices' do
   with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
     it 'should find all episode indices on the page' do
-      indices = LateJunction.indices(:legacy)
+      legacy = LateJunction.indices(:legacy)
+      current = LateJunction.indices(:current)
 
-      indices.length.should.equal 1
-      indices.first[-4..-1].should.equal '2004'
+      legacy.length.should.equal 1
+      legacy.first[-4..-1].should.equal '2004'
+
+      current.length.should.equal 1
+      current.first[-7..-1].should.equal '2010/01'
     end
 
     it 'should use the URI passed, if any' do

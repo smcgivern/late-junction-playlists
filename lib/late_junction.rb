@@ -43,6 +43,8 @@ module LateJunction
     case source
     when :legacy
       return page.xpath('//a[starts-with(@href, "?")]').map(&absolute(uri)).uniq
+    when :current
+      return page.search('.months li a').map(&absolute(uri)).uniq
     end
   end
 
