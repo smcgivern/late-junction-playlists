@@ -54,7 +54,12 @@ module LateJunction
     uris.map do |uri|
       page = html(uri)
 
-      page.css('div.month li a').map(&absolute(uri))
+      case source
+      when :legacy
+        page.css('div.month li a')
+      when :current
+        page.css('#broadcast-items h4 a')
+      end.map(&absolute(uri))
     end.flatten.uniq
   end
 

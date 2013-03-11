@@ -104,16 +104,21 @@ end
 describe 'LateJunction.episodes' do
   with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
     it 'should find all episodes on the pages passed' do
-      uris = [2004, 2005].map {|x| "http://www.bbc.co.uk/pips/#{x}/"}
-      episodes = LateJunction.episodes(:legacy, uris)
+      bbc = 'http://www.bbc.co.uk'
+      legacy_uris = [2004, 2005].map {|x| "#{bbc}/pips/#{x}/"}
+      current_uris = ["#{bbc}/programmes/b006tp52/broadcasts/2011/01"]
+      legacy = LateJunction.episodes(:legacy, legacy_uris)
+      current = LateJunction.episodes(:current, current_uris)
 
-      episodes.length.should.equal 286
-      episodes.first[-5..-1].should.equal 'uoj0a'
+      legacy.length.should.equal 286
+      legacy.first[-5..-1].should.equal 'uoj0a'
+      current.length.should.equal 4
+      current.first[-8..-1].should.equal 'b00xfhrt'
     end
 
     it 'should pull indices if no uris passed' do
-      LateJunction.episodes(:legacy).length.
-        should.equal 14
+      LateJunction.episodes(:legacy).length.should.equal 14
+      LateJunction.episodes(:current).length.should.equal 13
     end
   end
 end
