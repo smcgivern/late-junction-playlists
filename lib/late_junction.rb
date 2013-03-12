@@ -70,14 +70,17 @@ module LateJunction
       page = html(uri)
       playlist = {}
 
-      date = DateTime.strptime(page.at('#broadcast_instance').inner_text,
-                               '%A %d %B %Y %H:%M %z')
+      case source
+      when :legacy
+        date = DateTime.strptime(page.at('#broadcast_instance').inner_text,
+                                 '%A %d %B %Y %H:%M %z')
 
-      playlist[:date] = date
-      playlist[:title] = page.at('#episode-title').inner_text
-      playlist[:description] = page.at('#episode-description').inner_text
-      playlist[:presenter] = presenter(playlist[:description])
-      playlist[:tracks] = tracks(html_to_text(page.at('#play-list')))
+        playlist[:date] = date
+        playlist[:title] = page.at('#episode-title').inner_text
+        playlist[:description] = page.at('#episode-description').inner_text
+        playlist[:presenter] = presenter(playlist[:description])
+        playlist[:tracks] = tracks(html_to_text(page.at('#play-list')))
+      end
     end
   end
 
