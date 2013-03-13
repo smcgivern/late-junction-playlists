@@ -65,23 +65,30 @@ module LateJunction
 
   def self.playlists(source, uris=nil)
     uris ||= episodes(source)
+    parsed_playlists = []
 
     uris.map do |uri|
       page = html(uri)
-      playlist = {}
+      playlist = {:uri => uri}
 
       case source
       when :legacy
-        date = DateTime.strptime(page.at('#broadcast_instance').inner_text,
-                                 '%A %d %B %Y %H:%M %z')
+        if (date_text = page.at('#broadcast-instance'))
+          date = DateTime.strptime(date_text.inner_text, '%A %d %B %Y %H:%M %z')
 
-        playlist[:date] = date
-        playlist[:title] = page.at('#episode-title').inner_text
-        playlist[:description] = page.at('#episode-description').inner_text
-        playlist[:presenter] = presenter(playlist[:description])
+          playlist[:date] = date
+          playlist[:title] = page.at('#episode-title').inner_text
+          playlist[:description] = page.at('#episode-description').inner_text
+          playlist[:presenter] = presenter(playlist[:description])
+        end
+
         playlist[:tracks] = tracks(html_to_text(page.at('#play-list')))
+
+        parsed_playlists << playlist
       end
     end
+
+    parsed_playlists
   end
 
   def self.presenter(text)

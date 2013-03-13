@@ -117,8 +117,39 @@ describe 'LateJunction.episodes' do
     end
 
     it 'should pull indices if no uris passed' do
-      LateJunction.episodes(:legacy).length.should.equal 14
+      LateJunction.episodes(:legacy).length.should.equal 2
       LateJunction.episodes(:current).length.should.equal 13
+    end
+  end
+end
+
+describe 'LateJunction.playlists' do
+  with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+    before do
+      @legacy = LateJunction.playlists(:legacy)
+    end
+
+    it "should return the episodes' playlists" do
+      @legacy.length.should.equal 2
+      @legacy[0][:tracks][0][:title].should.equal 'Proface! Welcome!'
+      @legacy[1][:tracks][-5][:title].should.equal 'Silent Night'
+      @legacy[1][:presenter].should.equal 'Fiona Talkington'
+    end
+
+    it 'should bail on metadata if the episode has no structured information' do
+      [:date, :title, :description, :presenter].each do |key|
+        @legacy[0][key].should.equal nil
+      end
+
+      @legacy[0][:uri].
+        should.equal 'http://www.bbc.co.uk/radio3/latejunction/pip/440gl'
+    end
+
+    it 'should pull episodes by URI' do
+      uris = ['http://www.bbc.co.uk/radio3/latejunction/pip/9eaog']
+
+      LateJunction.playlists(:legacy, uris)[0].
+        should.equal @legacy[1]
     end
   end
 end
@@ -136,11 +167,9 @@ end
 describe 'LateJunction.tracks' do
   before do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
-      @pages = ['9eaog', '440gl'].
-        map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}/"}.
-        map {|x| LateJunction.html(x)}
-
-      @playlists = @pages.
+      @legacy = ['9eaog', '440gl'].
+        map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
+        map {|x| LateJunction.html(x)}.
         map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
         map {|x| LateJunction.tracks(x) }
     end
@@ -155,19 +184,19 @@ describe 'LateJunction.tracks' do
       :composer => 'Trad',
     }
 
-    @playlists[0].length.should.equal 16
-    @playlists[0][-5].should.equal silent_night
+    @legacy[0].length.should.equal 16
+    @legacy[0][-5].should.equal silent_night
   end
 
   it 'should split tracks correctly' do
-    @playlists[1][6][:title].should.equal 'El Noi de la Mare'
-    @playlists[1][7][:title].should.equal 'El decembre congelat'
-    @playlists[1][6][:artists].should.equal @playlists.last[7][:artists]
+    @legacy[1][6][:title].should.equal 'El Noi de la Mare'
+    @legacy[1][7][:title].should.equal 'El decembre congelat'
+    @legacy[1][6][:artists].should.equal @legacy.last[7][:artists]
   end
 
   it 'should fix broken lines' do
     3.upto(9) do |i|
-      @playlists[0][i][:artists].
+      @legacy[0][i][:artists].
         should.equal ['Susanna and the Magical Orchestra']
     end
   end
