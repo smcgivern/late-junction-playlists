@@ -7,7 +7,7 @@ module LateJunction
   CACHE_DIRECTORY = 'tmp/playlists'
 
   PRESENTERS = ['Fiona Talkington', 'Verity Sharp', 'Max Reinhardt',
-                'Nick Luscombe', 'Anne-Hilde Nesset']
+                'Nick Luscombe', 'Anne-Hilde Neset']
 
   START_PAGES = {
     :legacy => 'http://www.bbc.co.uk/radio3/latejunction/pip/archive/',
