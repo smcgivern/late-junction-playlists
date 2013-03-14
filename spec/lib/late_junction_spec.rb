@@ -172,6 +172,12 @@ describe 'LateJunction.tracks' do
         map {|x| LateJunction.html(x)}.
         map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
         map {|x| LateJunction.tracks(:legacy, x) }
+
+      @current = ['b00q90qy', 'b00hr5ln'].
+        map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
+        map {|x| LateJunction.html(x)}.
+        map {|x| x.at('#synopsis .copy')['content'] }.
+        map {|x| LateJunction.tracks(:current, x) }
     end
   end
 
@@ -184,8 +190,17 @@ describe 'LateJunction.tracks' do
       :composer => 'Trad',
     }
 
+    la_llorona = {
+      :time => '23:35',
+      :title => 'La Llorona',
+      :artists => ['Bairut'], # [sic]
+      :album => 'March Of The Zapotec',
+    }
+
     @legacy[0].length.should.equal 16
     @legacy[0][-5].should.equal silent_night
+    @current[0].length.should.equal 27
+    @current[1][5].should.equal la_llorona
   end
 
   it 'should split tracks correctly' do

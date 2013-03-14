@@ -108,24 +108,31 @@ module LateJunction
     end.reject do |x|
       x.empty?
     end.each do |group|
-      next if group.length == 1 or group[0] == 'LATE JUNCTION'
+      next if group.length < 3 or group[0] == 'LATE JUNCTION'
 
       # Fix lines that begin with a / by appending them to the previous line.
       group = group.reduce([]) {|g, l| (l[0..0] == '/' ? g.last : g) << l; g}
 
-      case source
-      when :legacy
-        titles, composer = group[1].split(/: */).reverse
+      titles, composer = group[1].split(/: */).reverse
 
-        titles.split(/ *\/ */).each do |title|
-          parsed_tracks << {
-            :time => group[0].gsub('.', ':'),
-            :composer => composer,
-            :title => title,
-            :artists => group[2].split(/ *\/ */),
-            :album => group[3].gsub('Taken from the album ', ''),
-          }
+      titles.split(/ *\/ */).each do |title|
+        parsed_track = {
+          :time => group[0].gsub('.', ':'),
+          :title => title,
+        }
+
+        case source
+        when :legacy
+          parsed_track[:composer] = composer
+          parsed_track[:artists] = group[2].split(/ *\/ */)
+          parsed_track[:album] = group[3].gsub('Taken from the album ', '')
+        when :current
+          p group unless composer
+          parsed_track[:artists] = composer.split(/ *\/ */)
+          parsed_track[:album] = group[2].gsub('Album: ', '')
         end
+
+        parsed_tracks << parsed_track
       end
     end
 
