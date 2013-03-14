@@ -171,7 +171,7 @@ describe 'LateJunction.tracks' do
         map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
         map {|x| LateJunction.html(x)}.
         map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
-        map {|x| LateJunction.tracks(x) }
+        map {|x| LateJunction.tracks(:legacy, x) }
     end
   end
 

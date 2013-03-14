@@ -82,7 +82,7 @@ module LateJunction
           playlist[:presenter] = presenter(playlist[:description])
         end
 
-        playlist[:tracks] = tracks(html_to_text(page.at('#play-list')))
+        playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
 
         parsed_playlists << playlist
       end
@@ -95,7 +95,7 @@ module LateJunction
     text.match(/(#{PRESENTERS.join('|')})/).to_s
   end
 
-  def self.tracks(text)
+  def self.tracks(source, text)
     parsed_tracks = []
 
     text.reduce([[]]) do |groups, line|
@@ -106,21 +106,24 @@ module LateJunction
     end.reject do |x|
       x.empty?
     end.each do |group|
-      next if group.length === 1
+      next if group.length == 1 or group[0] == 'LATE JUNCTION'
 
       # Fix lines that begin with a / by appending them to the previous line.
       group = group.reduce([]) {|g, l| (l[0..0] == '/' ? g.last : g) << l; g}
 
-      titles, composer = group[1].split(/: */).reverse
+      case source
+      when :legacy
+        titles, composer = group[1].split(/: */).reverse
 
-      titles.split(/ *\/ */).each do |title|
-        parsed_tracks << {
-          :time => group[0].gsub('.', ':'),
-          :composer => composer,
-          :title => title,
-          :artists => group[2].split(/ *\/ */),
-          :album => group[3].gsub('Taken from the album ', ''),
-        }
+        titles.split(/ *\/ */).each do |title|
+          parsed_tracks << {
+            :time => group[0].gsub('.', ':'),
+            :composer => composer,
+            :title => title,
+            :artists => group[2].split(/ *\/ */),
+            :album => group[3].gsub('Taken from the album ', ''),
+          }
+        end
       end
     end
 
