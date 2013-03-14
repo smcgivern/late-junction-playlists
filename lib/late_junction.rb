@@ -33,7 +33,9 @@ module LateJunction
   end
 
   def self.html_to_text(html)
-    Nokogiri::HTML(html.inner_html.gsub(/<\/?(br|p).*?>/, "\n")).inner_text
+    line_breaks = /<\/?(br|p|div|h[1-6]).*?>/
+
+    Nokogiri::HTML(html.inner_html.gsub(line_breaks, "\n")).inner_text
   end
 
   def self.indices(source, uri=nil)

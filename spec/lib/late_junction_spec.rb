@@ -65,14 +65,14 @@ end
 describe 'LateJunction.html_to_text' do
   before do
     @tests = [
-              '1<br>2', '3<br />4', '<p id="lede">5<br>6</p>',
+              '<div>1</div>2', '3<br />4', '<p id="lede">5<br>6</p>', '<h1>',
               '<strong>No</strong>, he said, using <em>emphasis</em>.'
              ].map {|x| Nokogiri::HTML(x)}
   end
 
   it 'should replace paragraph and line-break tags with newlines' do
     @tests[0...-1].map {|x| LateJunction.html_to_text(x) }.
-      should.equal ["\n1\n2\n", "\n3\n4\n", "\n5\n6\n"]
+      should.equal ["\n\n1\n2", "\n3\n4\n", "\n5\n6\n", "\n\n"]
   end
 
   it 'should strip all tags' do
