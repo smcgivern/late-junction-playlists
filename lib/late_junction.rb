@@ -141,4 +141,17 @@ module LateJunction
 
     parsed_tracks
   end
+
+  def self.structured_tracks(segments)
+    segments.search('li.segment.track').map do |segment|
+      text = inner_text(segment)
+
+      {
+        :time => text['.play-time'],
+        :artists => text['.artist'].split(/ *\/ */),
+        :title => text['.title'],
+        :album => text['.release-title'],
+      }
+    end
+  end
 end

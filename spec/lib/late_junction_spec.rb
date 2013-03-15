@@ -230,3 +230,26 @@ describe 'LateJunction.tracks' do
     end
   end
 end
+
+describe 'LateJunction.structured_tracks' do
+  before do
+    with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
+      @current = ['b00xfg3p'].
+        map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
+        map {|x| LateJunction.html(x).at('#segments') }.
+        map {|x| LateJunction.structured_tracks(x) }
+    end
+  end
+
+  it 'should pull in as much track info as possible' do
+    before_night = {
+      :time => '01:33',
+      :artists => ['Ensemble'],
+      :title => 'Before Night',
+      :album => 'Excerpts',
+    }
+
+    @current[0].length.should.equal 22
+    @current[0][-2].should.equal before_night
+  end
+end
