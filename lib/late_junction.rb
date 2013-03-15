@@ -71,7 +71,6 @@ module LateJunction
 
   def self.playlists(source, uris=nil)
     uris ||= episodes(source)
-    parsed_playlists = []
 
     uris.map do |uri|
       page = html(uri)
@@ -88,12 +87,10 @@ module LateJunction
         end
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
-
-        parsed_playlists << playlist
       end
-    end
 
-    parsed_playlists
+      playlist
+    end
   end
 
   def self.presenter(text)
