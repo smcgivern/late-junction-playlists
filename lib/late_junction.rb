@@ -87,6 +87,11 @@ module LateJunction
         end
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
+      when :current
+        playlist[:tracks] = ((segments = page.at('#segments')) ?
+                             structured_tracks(segments) :
+                             tracks(source,
+                                    page.at('#synopsis .copy')['content']))
       end
 
       playlist
@@ -127,7 +132,6 @@ module LateJunction
           parsed_track[:artists] = group[2].split(/ *\/ */)
           parsed_track[:album] = group[3].gsub('Taken from the album ', '')
         when :current
-          p group unless composer
           parsed_track[:artists] = composer.split(/ *\/ */)
           parsed_track[:album] = group[2].gsub('Album: ', '')
         end
