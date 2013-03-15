@@ -38,6 +38,10 @@ module LateJunction
     Nokogiri::HTML(html.inner_html.gsub(line_breaks, "\n")).inner_text
   end
 
+  def self.inner_text(root)
+    lambda {|s| (e = root.at(s)) ? e.inner_text : nil}
+  end
+
   def self.indices(source, uri=nil)
     uri ||= START_PAGES[source]
     page = html(uri)
@@ -72,15 +76,14 @@ module LateJunction
     uris.map do |uri|
       page = html(uri)
       playlist = {:uri => uri}
+      text = inner_text(page)
 
       case source
       when :legacy
-        if (date_text = page.at('#broadcast-instance'))
-          date = DateTime.strptime(date_text.inner_text, '%A %d %B %Y %H:%M %z')
-
-          playlist[:date] = date
-          playlist[:title] = page.at('#episode-title').inner_text
-          playlist[:description] = page.at('#episode-description').inner_text
+        if (date_text = text['#broadcast-instance'])
+          playlist[:date] = DateTime.strptime(date_text, '%A %d %B %Y %H:%M %z')
+          playlist[:title] = text['#episode-title']
+          playlist[:description] = text['#episode-description']
           playlist[:presenter] = presenter(playlist[:description])
         end
 

@@ -81,6 +81,20 @@ describe 'LateJunction.html_to_text' do
   end
 end
 
+describe 'LateJunction.inner_text' do
+  it 'should return a block, based off root, which searches for selector' do
+    text = LateJunction.inner_text(Nokogiri::HTML('<i>1</i><b>2</b>'))
+
+    text['i'].should.equal '1'
+    text['b'].should.equal '2'
+  end
+
+  it 'should return nil for missing elements' do
+    LateJunction.inner_text(Nokogiri::HTML('<i>1</i>'))['b'].
+      should.equal nil
+  end
+end
+
 describe 'LateJunction.indices' do
   with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
     it 'should find all episode indices on the page' do
