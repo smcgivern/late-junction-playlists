@@ -144,7 +144,7 @@ module LateJunction
   end
 
   def self.structured_tracks(segments)
-    segments.search('li.segment.track').map do |segment|
+    segments.css('li.segment.track').map do |segment|
       text = inner_text(segment)
 
       {
