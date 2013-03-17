@@ -187,7 +187,7 @@ describe 'LateJunction.tracks' do
         map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
         map {|x| LateJunction.tracks(:legacy, x) }
 
-      @current = ['b00q90qy', 'b00hr5ln'].
+      @current = ['b00q90qy', 'b00q90wq'].
         map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
         map {|x| LateJunction.html(x)}.
         map {|x| x.at('#synopsis .copy')['content'] }.
@@ -204,17 +204,26 @@ describe 'LateJunction.tracks' do
       :composer => 'Trad',
     }
 
-    la_llorona = {
-      :time => '23:35',
-      :title => 'La Llorona',
-      :artists => ['Bairut'], # [sic]
-      :album => 'March Of The Zapotec',
+    casablanca = {
+      :time => '00:56',
+      :title => 'Casablanca',
+      :artists => ['Lonely Drifter Karen'],
+      :album => 'Grass Is Singing',
+    }
+
+    si_comme_la_lune = {
+      :time => '23:28',
+      :composer => 'Scriabine',
+      :title => 'Si Comme La Lune',
+      :artists => ['Laurence Equilbey, Accentus'],
+      :album => 'Transcriptions 2',
     }
 
     @legacy[0].length.should.equal 16
     @legacy[0][-5].should.equal silent_night
     @current[0].length.should.equal 27
-    @current[1][5].should.equal la_llorona
+    @current[0][-1].should.equal casablanca
+    @current[1][3].should.equal si_comme_la_lune
   end
 
   it 'should split tracks correctly' do
