@@ -88,10 +88,20 @@ module LateJunction
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
       when :current
-        playlist[:tracks] = ((segments = page.at('#segments')) ?
-                             structured_tracks(segments) :
-                             tracks(source,
-                                    page.at('#synopsis .copy')['content']))
+        playlist[:date] = DateTime.strptime(text['#last-on .details .date'],
+                                            '%A %d %B %Y')
+
+        playlist[:title] = text['h1.episode-title']
+        playlist[:presenter] = presenter(playlist[:title])
+
+        if (segments = page.at('#segments'))
+          playlist[:description] = text['#synopsis']
+          playlist[:tracks] = structured_tracks(segments)
+        else
+          playlist[:description] = text['#episode-summary']
+          playlist[:tracks] = tracks(source,
+                                     page.at('#synopsis .copy')['content'])
+        end
       end
 
       playlist

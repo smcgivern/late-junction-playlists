@@ -132,7 +132,7 @@ describe 'LateJunction.episodes' do
 
     it 'should pull indices if no uris passed' do
       LateJunction.episodes(:legacy).length.should.equal 2
-      LateJunction.episodes(:current).length.should.equal 13
+      LateJunction.episodes(:current).length.should.equal 2
     end
   end
 end
@@ -141,6 +141,7 @@ describe 'LateJunction.playlists' do
   with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
     before do
       @legacy = LateJunction.playlists(:legacy)
+      @current = LateJunction.playlists(:current)
     end
 
     it "should return the episodes' playlists" do
@@ -148,6 +149,9 @@ describe 'LateJunction.playlists' do
       @legacy[0][:tracks][0][:title].should.equal 'Proface! Welcome!'
       @legacy[1][:tracks][-5][:title].should.equal 'Silent Night'
       @legacy[1][:presenter].should.equal 'Fiona Talkington'
+
+      @current.length.should.equal 2
+      @current[1][:presenter].should.equal 'Max Reinhardt'
     end
 
     it 'should bail on metadata if the episode has no structured information' do
