@@ -33,6 +33,8 @@ module LateJunction
   end
 
   def self.html_to_text(html)
+    return '' unless html
+
     line_breaks = /<\/?(br|p|div|h[1-6]).*?>/
 
     Nokogiri::HTML(html.inner_html.gsub(line_breaks, "\n")).inner_text

@@ -79,6 +79,11 @@ describe 'LateJunction.html_to_text' do
     LateJunction.html_to_text(@tests.last).strip.
       should.equal 'No, he said, using emphasis.'
   end
+
+  it 'should return the empty string for non-HTML elements' do
+    LateJunction.html_to_text(nil).
+      should.equal ''
+  end
 end
 
 describe 'LateJunction.inner_text' do
@@ -161,6 +166,15 @@ describe 'LateJunction.playlists' do
 
       @legacy[0][:uri].
         should.equal 'http://www.bbc.co.uk/radio3/latejunction/pip/440gl'
+    end
+
+    it "should bail on the playlist if there isn't one" do
+      playlist = LateJunction.
+        playlists(:legacy,
+                  ['http://www.bbc.co.uk/radio3/latejunction/pip/0ej1z'])[0]
+
+      playlist[:date].should.equal DateTime.civil(2006, 9, 29)
+      playlist[:tracks].should.equal []
     end
 
     it 'should pull episodes by URI' do
