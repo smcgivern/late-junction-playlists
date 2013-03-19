@@ -140,6 +140,8 @@ module LateJunction
 
         case source
         when :legacy
+          next unless group[3]
+
           parsed_track[:composer] = composer
           parsed_track[:artists] = group[2].split(/ *\/ */)
           parsed_track[:album] = group[3].gsub('Taken from the album ', '')

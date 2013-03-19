@@ -185,7 +185,7 @@ end
 describe 'LateJunction.tracks' do
   before do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
-      @legacy = ['9eaog', '440gl'].
+      @legacy = ['9eaog', '440gl', 'uk1se'].
         map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
         map {|x| LateJunction.html(x)}.
         map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
@@ -234,6 +234,11 @@ describe 'LateJunction.tracks' do
     @legacy[1][6][:title].should.equal 'El Noi de la Mare'
     @legacy[1][7][:title].should.equal 'El decembre congelat'
     @legacy[1][6][:artists].should.equal @legacy[1][7][:artists]
+  end
+
+  it "should ignore tracks which don't fit" do
+    @legacy[2][1][:title].should.equal 'Bittertiles'
+    @legacy[2][2][:title].should.equal 'Prophecies'
   end
 
   it 'should fix broken lines' do
