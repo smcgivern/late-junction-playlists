@@ -80,7 +80,7 @@ module LateJunction
       case source
       when :legacy
         if (date_text = text['#broadcast-instance'])
-          playlist[:date] = DateTime.strptime(date_text, '%A %d %B %Y %H:%M %z')
+          playlist[:date] = DateTime.strptime(date_text, '%A %d %B %Y')
           playlist[:title] = text['#episode-title']
           playlist[:description] = text['#episode-description']
           playlist[:presenter] = presenter(playlist[:description])
