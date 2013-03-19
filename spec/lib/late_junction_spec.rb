@@ -233,7 +233,7 @@ describe 'LateJunction.tracks' do
   it 'should split tracks correctly' do
     @legacy[1][6][:title].should.equal 'El Noi de la Mare'
     @legacy[1][7][:title].should.equal 'El decembre congelat'
-    @legacy[1][6][:artists].should.equal @legacy.last[7][:artists]
+    @legacy[1][6][:artists].should.equal @legacy[1][7][:artists]
   end
 
   it 'should fix broken lines' do
