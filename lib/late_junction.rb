@@ -90,8 +90,9 @@ module LateJunction
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
       when :current
-        playlist[:date] = DateTime.strptime(text['#last-on .details .date'],
-                                            '%A %d %B %Y')
+        next unless (date_text = page.at('#last-on .details'))
+
+        playlist[:date] = DateTime.strptime(date_text['content'], '%Y-%m-%d')
 
         playlist[:title] = text['h1.episode-title']
         playlist[:presenter] = presenter(playlist[:title])
