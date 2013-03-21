@@ -150,12 +150,12 @@ module LateJunction
           parsed_track[:album] = group[3].gsub('Taken from the album ', '')
         when :current
           if group[2].include?('Album: ')
-            parsed_track[:artists] = composer.split(/ *\/ */)
+            parsed_track[:artists] = composer.split(/ *\/ */) if composer
             parsed_track[:album] = group[2].gsub('Album: ', '')
           else
             parsed_track[:composer] = composer
             parsed_track[:artists] = group[2].split(/ *\/ */)
-            parsed_track[:album] = group[3].gsub('Album: ', '')
+            parsed_track[:album] = group[3].gsub('Album: ', '') if group[3]
           end
         end
 
@@ -170,9 +170,11 @@ module LateJunction
     segments.css('li.segment.track').map do |segment|
       text = inner_text(segment)
 
+      next unless (artists = text['.artist'])
+
       {
         :time => text['.play-time'],
-        :artists => text['.artist'].split(/ *\/ */),
+        :artists => artists.split(/ *\/ */),
         :title => text['.title'],
         :album => text['.release-title'],
       }
