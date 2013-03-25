@@ -37,7 +37,11 @@ task :populate_db, :file do |t, args|
   require 'schema'
 
   JSON.parse(open(args[:file]).read).each do |ep|
-    (puts "Skipping #{ep['uri']}"; next) if Episode.first(:uri => ep['uri'])
+    if ep.nil? || Episode.first(:uri => ep['uri'])
+      puts "Skipping #{ep && ep['uri']}"
+
+      next
+    end
 
     puts "Processing #{ep['uri']}"
 
