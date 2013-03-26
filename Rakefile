@@ -53,11 +53,10 @@ task :populate_db, :file do |t, args|
                              :description => ep['description'])
 
     ep['tracks'].each do |tr|
+
       playlist_track = PlaylistTrack.create
 
-      if episode.date
-        time = tr['time']
-
+      if episode.date and time = tr['time']
         if time > '10:00' and time < '12:00'
           time = "#{time.split(':')[0].to_i + 12}:#{time.split(':')[1]}"
         end
