@@ -22,12 +22,13 @@ module LateJunction
     File.join(CACHE_DIRECTORY, uri.gsub(/\W/, '-'))
   end
 
-  def self.html(uri)
+  def self.html(uri, force=false)
     file = cache_filename(uri)
-    to_open = File.exist?(file) ? file : uri
+    use_cache = (File.exist?(file) && !force)
+    to_open = use_cache ? file : uri
     page = Nokogiri::HTML(open(to_open))
 
-    File.open(file, 'w').puts(page) unless File.exist?(file)
+    File.open(file, 'w').puts(page) unless use_cache
 
     page
   end

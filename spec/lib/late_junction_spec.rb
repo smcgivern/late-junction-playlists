@@ -48,6 +48,25 @@ describe 'LateJunction.html' do
     end
   end
 
+  it 'should not look in the cache when force=true' do
+    dir = Dir.mktmpdir
+    filename = File.join(dir, 'spec-fixture-pips')
+    file = open(filename, 'w')
+
+    file.puts('<title>Cached copy</title>')
+    file.flush
+
+    with_const(LateJunction::CACHE_DIRECTORY, dir) do
+      LateJunction.html('spec/fixture/pips', true).at('title').inner_text.
+        should.equal 'BBC - (none) - Late Junction - Archive'
+
+      File.stat(filename).size.
+        should.satisfy {|x| x > 27}
+    end
+
+    FileUtils.remove_entry_secure(dir)
+  end
+
   it 'should add the file contents to the cache' do
     dir = Dir.mktmpdir
 
