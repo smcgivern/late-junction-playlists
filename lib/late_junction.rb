@@ -26,11 +26,11 @@ module LateJunction
     file = cache_filename(uri)
     use_cache = (File.exist?(file) && !force)
     to_open = use_cache ? file : uri
-    page = Nokogiri::HTML(open(to_open))
+    page = open(to_open)
 
     File.open(file, 'w').puts(page) unless use_cache
 
-    page
+    Nokogiri::HTML(page)
   end
 
   def self.html_to_text(html)
