@@ -28,7 +28,12 @@ module LateJunction
     to_open = use_cache ? file : uri
     page = open(to_open)
 
-    File.open(file, 'w').puts(page) unless use_cache
+    unless use_cache
+      cached = open(file, 'w')
+
+      cached.puts(page)
+      cached.flush
+    end
 
     Nokogiri::HTML(page)
   end
