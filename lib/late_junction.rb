@@ -26,7 +26,7 @@ module LateJunction
     file = cache_filename(uri)
     use_cache = (File.exist?(file) && !force)
     to_open = use_cache ? file : uri
-    page = open(to_open)
+    page = open(to_open).read
 
     unless use_cache
       cached = open(file, 'w')
