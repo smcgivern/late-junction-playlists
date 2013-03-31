@@ -50,7 +50,7 @@ module LateJunction
     lambda {|s| (e = root.at(s)) ? e.inner_text : nil}
   end
 
-  def self.indices(source, uri=nil)
+  def self.indices(source, uri=nil, force=nil)
     uri ||= START_PAGES[source]
     page = html(uri)
 
@@ -62,8 +62,8 @@ module LateJunction
     end
   end
 
-  def self.episodes(source, uris=nil)
-    uris ||= indices(source)
+  def self.episodes(source, uris=nil, force=nil)
+    uris ||= indices(source, nil, force)
 
     uris.map do |uri|
       page = html(uri)
@@ -77,8 +77,8 @@ module LateJunction
     end.flatten.uniq
   end
 
-  def self.playlists(source, uris=nil)
-    uris ||= episodes(source)
+  def self.playlists(source, uris=nil, force=nil)
+    uris ||= episodes(source, nil, force)
 
     uris.map do |uri|
       page = html(uri)
