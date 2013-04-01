@@ -53,6 +53,7 @@ task :populate_db, :file do |t, args|
                              :description => ep['description'])
 
     ep['tracks'].each do |tr|
+      next unless tr
 
       playlist_track = PlaylistTrack.create
 
