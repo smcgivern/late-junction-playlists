@@ -70,7 +70,7 @@ task :populate_db, :file do |t, args|
       playlist_track.composer = Composer.first_or_create(:name => tr['composer'])
       playlist_track.album = Album.first_or_create(:name => tr['album'])
 
-      tr['artists'].each do |artist|
+      (tr['artists'] || []).each do |artist|
         playlist_track.artists << Artist.first_or_create(:name => artist)
       end
 
