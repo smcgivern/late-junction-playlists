@@ -78,7 +78,6 @@ task :populate_db, :file do |t, args|
 
       playlist_track.episode = episode
       playlist_track.save
-
     end
   end
 end
