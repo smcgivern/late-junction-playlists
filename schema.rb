@@ -8,7 +8,7 @@ class Presenter
   has n, :episodes, :through => Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :length => 500
 end
 
 class Track
@@ -17,7 +17,7 @@ class Track
   has n, :playlist_tracks, :through => Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :length => 500
 end
 
 class Artist
@@ -26,7 +26,7 @@ class Artist
   has n, :playlist_tracks, :through => Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :length => 500
 end
 
 class Composer
@@ -35,7 +35,7 @@ class Composer
   has n, :playlist_tracks, :through => Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :length => 500
 end
 
 class Album
@@ -44,7 +44,7 @@ class Album
   has n, :playlist_tracks, :through => Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :length => 500
 end
 
 class PlaylistTrack
@@ -69,7 +69,7 @@ class Episode
   property :id, Serial
   property :uri, String, :unique => true
   property :date, Date
-  property :name, String
+  property :name, String, :length => 500
   property :description, Text
 end
 
