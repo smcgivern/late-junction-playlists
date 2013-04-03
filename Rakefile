@@ -76,9 +76,9 @@ task :populate_db, :file do |t, args|
         playlist_track.artists << Artist.first_or_create(:name => artist)
       end
 
+      playlist_track.episode = episode
       playlist_track.save
 
-      episode.playlist_tracks << playlist_track
     end
   end
 end
