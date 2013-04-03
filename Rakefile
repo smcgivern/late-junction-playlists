@@ -52,6 +52,8 @@ task :populate_db, :file do |t, args|
                              :name => ep['title'],
                              :description => ep['description'])
 
+    episode.save
+
     ep['tracks'].each do |tr|
       next unless tr
 
@@ -78,8 +80,6 @@ task :populate_db, :file do |t, args|
 
       episode.playlist_tracks << playlist_track
     end
-
-    episode.save
   end
 end
 
