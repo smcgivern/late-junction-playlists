@@ -1,6 +1,6 @@
 require 'data_mapper'
 
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/late_junction.db")
+DataMapper.setup(:default, "sqlite://#{Dir.pwd}/tmp/late_junction.db")
 
 class Presenter
   include DataMapper::Resource
