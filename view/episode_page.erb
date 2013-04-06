@@ -1,0 +1,18 @@
+<html>
+<title><%= @episode.date %></title>
+<body>
+<h2>
+  <a href="<%= @episode.uri %>"><%= @episode.id %> - <%= @episode.date %></a>
+</h2>
+<ol>
+<% @episode.playlist_tracks.each do |playlist_track| %>
+  <li>
+    <code>
+      <%= playlist_track.track.name %> -
+      <%= playlist_track.artists.map {|a| a.name }.join(', ') %>
+    </code>
+  </li>
+<% end %>
+</ol>
+</body>
+</html>
