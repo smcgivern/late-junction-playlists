@@ -17,7 +17,7 @@ get '/missing-date/' do
   erb :episode_list
 end
 
-get '/missing-playlists/' do
+get '/missing-playlist/' do
   @episodes = Episode.all(:order => [:date.desc]).select do |episode|
     episode.playlist_tracks.length == 0
   end
