@@ -11,6 +11,12 @@ get '/' do
   erb :index
 end
 
+get '/all-episodes/' do
+  @episodes = Episode.all(:id => 520, :order => [:id.desc])
+
+  erb :episode_list
+end
+
 get '/missing-date/' do
   @episodes = Episode.all(:date => nil, :order => [:id.desc])
 
