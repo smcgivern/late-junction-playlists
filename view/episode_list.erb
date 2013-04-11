@@ -4,7 +4,9 @@
 <ol>
 <% @episodes.each do |episode| %>
   <li>
-    <a href="/<%= episode.id %>/"><%= episode.id %> - <%= episode.date %></a>:
+    <a href="/<%= episode.id %>/">
+      <%= episode.id %> - <%= episode.date %> - <%= episode.presenter.name %>
+    </a>:
     <%= episode.playlist_tracks.length %>
   </li>
 <% end %>
