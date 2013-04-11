@@ -31,6 +31,12 @@ get '/missing-playlist/' do
   erb :episode_list
 end
 
+get '/missing-presenter/' do
+  @episodes = Episode.all(Episode.presenter.name => nil, :order => [:id.desc])
+
+  erb :episode_list
+end
+
 get '/:episode/' do
   @episode = Episode.get(params['episode'])
 
