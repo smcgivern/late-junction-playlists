@@ -2,7 +2,6 @@ desc 'Populate database from JSON'
 task :populate_db, :file do |t, args|
   require 'data_mapper'
   require 'json'
-  require 'schema'
 
   log = [
          'tmp/log/populate',
@@ -11,6 +10,8 @@ task :populate_db, :file do |t, args|
         ]
 
   DataMapper::Logger.new("#{log.join('-')}.log", :debug)
+
+  require 'schema'
 
   JSON.parse(open(args[:file]).read).each do |ep|
     if ep.nil? || Episode.first(:uri => ep['uri'])
