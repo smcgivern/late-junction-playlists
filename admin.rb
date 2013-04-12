@@ -12,7 +12,7 @@ get '/' do
 end
 
 get '/all-episodes/' do
-  @episodes = Episode.all(:id => 520, :order => [:id.desc])
+  @episodes = Episode.all(:order => [:id.desc])
 
   erb :episode_list
 end
