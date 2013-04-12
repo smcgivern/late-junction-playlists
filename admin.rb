@@ -1,9 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'schema'
+DataMapper::Logger.new('tmp/log/admin.log', :debug)
 
-DataMapper::Logger.new("tmp/log/admin-#{Time.now.strftime('%F-%T')}.log",
-                       :debug)
 
 set :views, 'view'
 
