@@ -1,10 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require 'data_mapper'
-
-DataMapper::Logger.new('tmp/log/admin.log', :debug)
-
 require 'schema'
+
+Database('admin.log')
 
 set :views, 'view'
 

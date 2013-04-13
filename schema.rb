@@ -1,6 +1,14 @@
 require 'data_mapper'
 
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/tmp/late_junction.db")
+def Database(log_file=nil, database_file='tmp/late_junction.db', level=:debug)
+  log_to = (log_file ? "tmp/log/#{log_file}" : $stdout)
+
+  DataMapper::Logger.new(log_to, level)
+  DataMapper.setup(:default, "sqlite://#{Dir.pwd}/#{database_file}")
+
+  DataMapper.finalize
+  DataMapper.auto_upgrade!
+end
 
 class Presenter
   include DataMapper::Resource
@@ -72,6 +80,3 @@ class Episode
   property :name, String, :length => 500
   property :description, Text
 end
-
-DataMapper.finalize
-DataMapper.auto_upgrade!

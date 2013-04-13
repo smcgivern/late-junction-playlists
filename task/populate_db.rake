@@ -1,17 +1,12 @@
 desc 'Populate database from JSON'
 task :populate_db, :file do |t, args|
-  require 'data_mapper'
   require 'json'
-
-  log = [
-         'tmp/log/populate',
-         args[:file].gsub(/\W/, '-'),
-         Time.now.strftime('%F-%T'),
-        ]
-
-  DataMapper::Logger.new("#{log.join('-')}.log", :debug)
-
   require 'schema'
+
+  Database(['populate',
+            args[:file].gsub(/\W/, '-'),
+            Time.now.strftime('%F-%T')].
+           join('-'))
 
   JSON.parse(open(args[:file]).read).each do |ep|
     if ep.nil? || Episode.first(:uri => ep['uri'])
