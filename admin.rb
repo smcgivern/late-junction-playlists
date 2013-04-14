@@ -11,27 +11,32 @@ get '/' do
 end
 
 get '/all-episodes/' do
-  @episodes = Episode.all(:order => [:id.desc])
+  @episodes = Episode.eager(:playlist_tracks, :presenter).all
 
   erb :episode_list
 end
 
 get '/missing-date/' do
-  @episodes = Episode.all(:date => nil, :order => [:id.desc])
+  @episodes = Episode.where(:date => nil).eager(:playlist_tracks, :presenter).all
 
   erb :episode_list
 end
 
 get '/missing-playlist/' do
-  @episodes = Episode.all(:order => [:date.desc]).select do |episode|
-    episode.playlist_tracks.length == 0
-  end
+  @episodes = Episode.
+    eager(:playlist_tracks, :presenter).
+    all.
+    select {|e| e.playlist_tracks.length == 0 }
 
   erb :episode_list
 end
 
 get '/missing-presenter/' do
-  @episodes = Episode.all(Episode.presenter.name => nil, :order => [:id.desc])
+  @episodes = Episode.
+    where(:presenter => Presenter.where(Sequel.|({:name => nil},
+                                                 {:name => ''}))).
+    eager(:playlist_tracks, :presenter).
+    all
 
   erb :episode_list
 end
