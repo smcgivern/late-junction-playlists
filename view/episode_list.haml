@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Late Junction playlists
+  %body
+    %h1 Late Junction playlists
+    %ol
+      - @episodes.each do |episode|
+        %li
+          %a{:href => "/#{episode.id}/"}><
+            #{episode.id} - #{episode.date} - #{episode.presenter.name}
+          \: #{episode.playlist_tracks.length}
