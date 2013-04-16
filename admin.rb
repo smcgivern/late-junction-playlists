@@ -17,7 +17,10 @@ get '/all-episodes/' do
 end
 
 get '/missing-date/' do
-  @episodes = Episode.where(:date => nil).eager(:playlist_tracks, :presenter).all
+  @episodes = Episode.
+    where(:date => nil).
+    eager(:playlist_tracks, :presenter).
+    all
 
   haml :episode_list
 end
