@@ -10,13 +10,13 @@ get '/' do
   haml :index
 end
 
-get '/all-episodes/' do
+get '/episodes/all/' do
   @episodes = Episode.eager(:playlist_tracks, :presenter).all
 
   haml :episode_list
 end
 
-get '/missing-date/' do
+get '/episodes/missing-date/' do
   @episodes = Episode.
     where(:date => nil).
     eager(:playlist_tracks, :presenter).
@@ -25,7 +25,7 @@ get '/missing-date/' do
   haml :episode_list
 end
 
-get '/missing-playlist/' do
+get '/episodes/missing-playlist/' do
   @episodes = Episode.
     eager(:playlist_tracks, :presenter).
     all.
@@ -34,7 +34,7 @@ get '/missing-playlist/' do
   haml :episode_list
 end
 
-get '/missing-presenter/' do
+get '/episodes/missing-presenter/' do
   @episodes = Episode.
     where(:presenter => Presenter.where(Sequel.|({:name => nil},
                                                  {:name => ''}))).
@@ -44,7 +44,7 @@ get '/missing-presenter/' do
   haml :episode_list
 end
 
-get '/:episode/' do
+get '/episodes/:episode/' do
   @episode = Episode.get(params['episode'])
 
   haml :episode_page
