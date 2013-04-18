@@ -14,4 +14,12 @@ class Episode < Sequel::Model
   end
 
   create_table?
+
+  def slug
+    uri.split('/').last
+  end
+
+  def self.by_slug(s)
+    where { :uri.like("%#{s}") }
+  end
 end
