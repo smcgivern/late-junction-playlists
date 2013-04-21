@@ -44,8 +44,8 @@ get '/episodes/missing-presenter/' do
   haml :episode_list
 end
 
-get '/episodes/:episode/' do
-  @episode = Episode.get(params['episode'])
+get '/episodes/:slug/' do
+  @episode = Episode.by_slug(params['slug']).first
 
   haml :episode_page
 end
