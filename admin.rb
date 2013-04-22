@@ -49,3 +49,9 @@ get '/episodes/:slug/' do
 
   haml :episode_page
 end
+
+get '/artists/contains-album/' do
+  @artists = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
+
+  haml :artist_list
+end

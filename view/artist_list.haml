@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title Late Junction playlists
+  %body
+    %h1 Late Junction playlists
+    %ol
+      - @artists.each do |artist|
+        %li
+          #{artist.id} - #{artist.name}
