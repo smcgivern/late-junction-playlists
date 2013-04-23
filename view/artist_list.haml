@@ -7,4 +7,5 @@
     %ol
       - @artists.each do |artist|
         %li
-          #{artist.id} - #{artist.name}
+          %a{:href => "/artists/#{artist.id}/"}
+            #{artist.id} - #{artist.name}

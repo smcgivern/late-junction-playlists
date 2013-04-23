@@ -55,3 +55,9 @@ get '/artists/contains-album/' do
 
   haml :artist_list
 end
+
+get '/artists/:id/' do
+  @artist = Artist[params['id'].to_i]
+
+  haml :artist_page
+end
