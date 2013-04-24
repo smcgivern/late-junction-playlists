@@ -1,11 +1,5 @@
-!!!
-%html
-  %head
-    %title Late Junction playlists
-  %body
-    %h1 Late Junction playlists
-    %ol
-      - @artists.each do |artist|
-        %li
-          %a{:href => "/artists/#{artist.id}/"}
-            #{artist.id} - #{artist.name}
+%ol
+  - @artists.each do |artist|
+    %li
+      %a{:href => "/artists/#{artist.id}/"}
+        #{artist.id} - #{artist.name}

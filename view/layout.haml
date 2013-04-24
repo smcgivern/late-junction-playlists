@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title= @page_title
+  %body
+    %h1
+      - if @title_link
+        %a{:href => @title_link}= @page_title
+      - else
+        = @page_title
+    = yield

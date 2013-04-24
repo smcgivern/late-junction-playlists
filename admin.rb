@@ -7,11 +7,14 @@ Database('admin.log')
 set :views, 'view'
 
 get '/' do
+  @page_title = 'Late Junction playlists'
+
   haml :index
 end
 
 get '/episodes/all/' do
   @episodes = Episode.eager(:playlist_tracks, :presenter).all
+  @page_title = 'All episodes'
 
   haml :episode_list
 end
@@ -22,6 +25,8 @@ get '/episodes/missing-date/' do
     eager(:playlist_tracks, :presenter).
     all
 
+  @page_title = 'Episodes missing dates'
+
   haml :episode_list
 end
 
@@ -30,6 +35,8 @@ get '/episodes/missing-playlist/' do
     eager(:playlist_tracks, :presenter).
     all.
     select {|e| e.playlist_tracks.length == 0 }
+
+  @page_title = 'Episodes missing playlists'
 
   haml :episode_list
 end
@@ -41,23 +48,29 @@ get '/episodes/missing-presenter/' do
     eager(:playlist_tracks, :presenter).
     all
 
+  @page_title = 'Episodes missing presenters'
+
   haml :episode_list
 end
 
 get '/episodes/:slug/' do
   @episode = Episode.by_slug(params['slug']).first
+  @page_title = @episode.date
+  @page_link = @episode.uri
 
   haml :episode_page
 end
 
 get '/artists/contains-album/' do
   @artists = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
+  @page_title = 'Artists with album in their name'
 
   haml :artist_list
 end
 
 get '/artists/:id/' do
   @artist = Artist[params['id'].to_i]
+  @page_title = @artist.name
 
   haml :artist_page
 end

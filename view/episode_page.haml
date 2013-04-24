@@ -1,14 +1,8 @@
-!!!
-%html
-  %head
-    %title= @episode.date
-  %body
-    %h1
-      %a{:href => @episode.uri}
-        #{@episode.id} - #{@episode.date} - #{@episode.presenter.name}
-    %ol
-      - @episode.playlist_tracks.each do |playlist_track|
-        %li
-          = playlist_track.track.name
-          \-
-          = playlist_track.artists.map {|a| a.name }.join(', ')
+%h2
+  #{@episode.id} - #{@episode.presenter.name}
+%ol
+  - @episode.playlist_tracks.each do |playlist_track|
+    %li
+      = playlist_track.track.name
+      \-
+      = playlist_track.artists.map {|a| a.name }.join(', ')
