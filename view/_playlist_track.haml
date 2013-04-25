@@ -1,0 +1,10 @@
+%dl
+  %dt Track
+  %dd= playlist_track.track.name
+  %dt Artists
+  - playlist_track.artists.each do |pta|
+    %dd= pta.name
+  %dt Album
+  %dd= playlist_track.album.name
+  %dt Composer
+  %dd= playlist_track.composer.name

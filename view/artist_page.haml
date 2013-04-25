@@ -1,13 +1,3 @@
 %ol
-  - @artist.playlist_tracks.each do |playlist_track|
-    %li
-      %dl
-        %dt Track
-        %dd= playlist_track.track.name
-        %dt Artists
-        - playlist_track.artists.each do |pta|
-          %dd= pta.name
-        %dt Album
-        %dd= playlist_track.album.name
-        %dt Composer
-        %dd= playlist_track.composer.name
+  - @artist.playlist_tracks.each do |pt|
+    %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}

@@ -2,7 +2,4 @@
   #{@episode.id} - #{@episode.presenter.name}
 %ol
   - @episode.playlist_tracks.each do |playlist_track|
-    %li
-      = playlist_track.track.name
-      \-
-      = playlist_track.artists.map {|a| a.name }.join(', ')
+    %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}
