@@ -68,9 +68,10 @@ get '/artists/contains-album/' do
   haml :artist_list
 end
 
-get '/artists/:id/' do
-  @artist = Artist[params['id'].to_i]
-  @page_title = @artist.name
+get '/:type/:id/' do
+  klass = Kernel.const_get(params['type'][0...-1].sub(/./) {|x| x.upcase})
+  @item = klass[params['id'].to_i]
+  @page_title = @item.name
 
-  haml :artist_page
+  haml :item_page
 end
