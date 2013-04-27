@@ -6,6 +6,10 @@ Database('admin.log')
 
 set :views, 'view'
 
+get '/style.css' do
+  scss :style
+end
+
 get '/' do
   @page_title = 'Late Junction playlists'
 
