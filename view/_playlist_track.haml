@@ -6,5 +6,6 @@
     %dd= pta.name
   %dt Album
   %dd= playlist_track.album.name
-  %dt Composer
-  %dd= playlist_track.composer.name
+  - if playlist_track.composer.name
+    %dt Composer
+    %dd= playlist_track.composer.name
