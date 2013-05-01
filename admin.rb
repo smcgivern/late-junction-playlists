@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'schema'
 
-Database('admin.log')
+DB = Database('admin.log')
 
 set :views, 'view'
 
