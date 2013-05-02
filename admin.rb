@@ -66,10 +66,10 @@ get '/episodes/:slug/' do
 end
 
 get '/artists/contains-album/' do
-  @artists = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
+  @items = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
   @page_title = 'Artists with album in their name'
 
-  haml :artist_list
+  haml :item_list
 end
 
 get '/:type/:id/' do
