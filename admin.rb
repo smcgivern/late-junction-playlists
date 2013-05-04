@@ -1,3 +1,5 @@
+require 'haml'
+require 'sass'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'schema'
