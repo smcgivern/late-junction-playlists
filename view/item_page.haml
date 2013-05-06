@@ -1,3 +1,3 @@
-%ol
+%ol.playlist-tracks
   - @item.playlist_tracks.each do |pt|
     %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}
