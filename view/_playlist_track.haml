@@ -1,11 +1,18 @@
 %dl.playlist-track
   %dt Track
-  %dd= playlist_track.track.name
+  %dd
+    %a{:href => "/tracks/#{playlist_track.track.id}/"}
+      = playlist_track.track.name
   %dt Artists
   - playlist_track.artists.each do |pta|
-    %dd= pta.name
+    %dd
+      %a{:href => "/artists/#{pta.id}/"}= pta.name
   %dt Album
-  %dd= playlist_track.album.name
+  %dd
+    %a{:href => "/albums/#{playlist_track.album.id}/"}
+      = playlist_track.album.name
   - if playlist_track.composer.name
     %dt Composer
-    %dd= playlist_track.composer.name
+    %dd
+      %a{:href => "/composers/#{playlist_track.composer.id}/"}
+        = playlist_track.composer.name
