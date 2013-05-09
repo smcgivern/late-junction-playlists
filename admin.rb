@@ -90,7 +90,7 @@ get '/:type/:id/' do
 end
 
 def model_const(s)
-  inf(:constantize, inflector(:singularize, inf(:camelize, s)))
+  inf(:constantize, inf(:singularize, inf(:camelize, s)))
 end
 
 def inf(m, s)
