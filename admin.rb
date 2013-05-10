@@ -90,9 +90,7 @@ get '/:type/:id/' do
 end
 
 def model_const(s)
-  inf(:constantize, inf(:singularize, inf(:camelize, s)))
-end
-
-def inf(m, s)
-  Class.new.extend(Sequel::Inflections).send(m, s)
+  Class.new.extend(Sequel::Inflections).instance_eval do
+    constantize(singularize(camelize(s)))
+  end
 end
