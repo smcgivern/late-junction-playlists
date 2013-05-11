@@ -82,15 +82,8 @@ get '/artists/contains-album/' do
 end
 
 get '/:type/:id/' do
-  klass = model_const(params['type'])
-  @item = klass[params['id'].to_i]
+  @item = model_constant(params['type'])[params['id'].to_i]
   @page_title = @item.name
 
   haml :item_page
-end
-
-def model_const(s)
-  Class.new.extend(Sequel::Inflections).instance_eval do
-    constantize(singularize(camelize(s)))
-  end
 end

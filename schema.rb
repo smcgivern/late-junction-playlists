@@ -14,3 +14,9 @@ def Database(log_file=nil, database_file='tmp/late_junction.db', level=:debug)
 
   db
 end
+
+def model_constant(s)
+  Class.new.extend(Sequel::Inflections).instance_eval do
+    constantize(singularize(camelize(s)))
+  end
+end
