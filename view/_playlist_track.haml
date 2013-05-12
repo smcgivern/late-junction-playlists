@@ -16,3 +16,7 @@
     %dd
       %a{:href => "/composers/#{playlist_track.composer.id}/"}
         = playlist_track.composer.name
+  %dt Episode
+  %dd
+    %a{:href => "/episodes/#{playlist_track.episode.slug}/"}
+      = playlist_track.episode.date
