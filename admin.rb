@@ -67,16 +67,16 @@ get '/episodes/:slug/' do
   haml :episode_page
 end
 
-get '/artists/all/' do
-  @items = Artist.eager(:playlist_tracks).all
-  @page_title = 'All artists'
+get '/artists/contains-album/' do
+  @items = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
+  @page_title = 'Artists with album in their name'
 
   haml :item_list
 end
 
-get '/artists/contains-album/' do
-  @items = Artist.where(:name.like('%album%')).eager(:playlist_tracks).all
-  @page_title = 'Artists with album in their name'
+get '/:type/all/' do
+  @items = model_constant(params['type']).eager(:playlist_tracks).all
+  @page_title = "All #{params['type']}"
 
   haml :item_list
 end
