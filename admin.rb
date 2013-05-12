@@ -62,7 +62,7 @@ end
 get '/episodes/:slug/' do
   @episode = Episode.by_slug(params['slug']).first
   @page_title = @episode.date
-  @page_link = @episode.uri
+  @title_link = @episode.uri
 
   haml :episode_page
 end
