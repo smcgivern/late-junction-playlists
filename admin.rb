@@ -74,6 +74,13 @@ get '/artists/contains-album/' do
   haml :item_list
 end
 
+get '/albums/contains-taken-from/' do
+  @items = Album.where(:name.ilike('%taken from%')).eager(:playlist_tracks).all
+  @page_title = 'Albums with taken from in their name'
+
+  haml :item_list
+end
+
 get '/:type/all/' do
   @items = model_constant(params['type']).eager(:playlist_tracks).all
   @page_title = "All #{params['type']}"
