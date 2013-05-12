@@ -2,4 +2,4 @@
   - @items.each do |item|
     %li
       %a{:href => "/#{item.class.table_name}/#{item.id}/"}
-        #{item.id} - #{item.name}
+        #{item.name} [#{item.id}]
