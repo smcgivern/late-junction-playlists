@@ -81,6 +81,22 @@ get '/albums/contains-taken-from/' do
   haml :item_list
 end
 
+get '/albums/renameable/' do
+  froms = [
+           'album', 'compilation', 'EP', 'single', 'promo', 'sampler',
+           'box set', 'opera', 'CD', 'sountrack', 'LP', 'OST',
+           'promotional sampler', 'demo',
+          ]
+
+  @items = Album.eager(:playlist_tracks).all.select do |album|
+    album.name =~ /\ATaken from the (#{froms.join('|')}):? /
+  end
+
+  @page_title = 'Albums that are automatically renameable'
+
+  haml :item_list
+end
+
 get '/:type/all/' do
   @items = model_constant(params['type']).eager(:playlist_tracks).all
   @page_title = "All #{params['type']}"
