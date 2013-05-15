@@ -11,9 +11,9 @@ end
 class Sequel::Model
   def rename(new_name)
     klass = self.class
-    existing = klass.where(:name => new_name).all
+    existing = klass[:name => new_name]
 
-    if existing.empty?
+    if !existing
       update(:name => new_name)
     else
       playlist_tracks_dataset.update(klass.table_name.to_sym => existing[0].id)
