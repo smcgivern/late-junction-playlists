@@ -16,7 +16,10 @@ class Sequel::Model
     if !existing
       update(:name => new_name)
     else
-      playlist_tracks_dataset.update(klass.table_name.to_sym => existing[0].id)
+      playlist_tracks.each do |pt|
+        remove_playlist_track(pt)
+        existing.add_playlist_track(pt)
+      end
     end
   end
 end
