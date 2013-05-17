@@ -16,10 +16,9 @@ class Sequel::Model
     if !existing
       update(:name => new_name)
     else
-      playlist_tracks.each do |pt|
-        remove_playlist_track(pt)
-        existing.add_playlist_track(pt)
-      end
+      ds = playlist_tracks_dataset
+
+      ds.update(ds.association_reflection[:key] => existing.id)
     end
   end
 end
