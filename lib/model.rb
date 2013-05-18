@@ -13,12 +13,10 @@ class Sequel::Model
     klass = self.class
     existing = klass[:name => new_name]
 
-    if !existing
-      update(:name => new_name)
-    else
-      ds = playlist_tracks_dataset
+    return update(:name => new_name) unless existing
 
-      ds.update(ds.association_reflection[:key] => existing.id)
-    end
+    ds = playlist_tracks_dataset
+
+    ds.update(ds.association_reflection[:key] => existing.id)
   end
 end
