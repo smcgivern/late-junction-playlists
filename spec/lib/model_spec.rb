@@ -32,3 +32,17 @@ describe 'Sequel::Model.rename' do
     quux.playlist_tracks.length.should.equal 1
   end
 end
+
+describe 'Sequel::Model.swap' do
+  it "should rename both items to each other's name" do
+    foo = Composer.create(:name => 'Foo')
+    bar = Track.create(:name => 'Bar')
+
+    foo.swap(bar)
+
+    Composer.where(:name => 'Foo').all.length.should.equal 0
+    Composer.where(:name => 'Bar').all.length.should.equal 1
+    Track.where(:name => 'Foo').all.length.should.equal 1
+    Track.where(:name => 'Bar').all.length.should.equal 0
+  end
+end

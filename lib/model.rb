@@ -19,4 +19,11 @@ class Sequel::Model
 
     ds.update(ds.association_reflection[:key] => existing.id)
   end
+
+  def swap(other)
+    new_name = other.name
+
+    other.rename(name)
+    rename(new_name)
+  end
 end
