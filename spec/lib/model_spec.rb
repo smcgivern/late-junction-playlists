@@ -3,6 +3,8 @@ require './lib/model'
 
 DB = Sequel.sqlite
 
+Dir['./model/*.rb'].each {|m| require m}
+
 describe 'model_constant' do
   it 'should return the model class / constant from a table name' do
     class Foo < Sequel::Model; end
@@ -12,10 +14,6 @@ describe 'model_constant' do
 end
 
 describe 'Sequel::Model.rename' do
-  before do
-    Dir['model/*.rb'].each {|m| require m}
-  end
-
   it 'should rename the item directly if none exists with the new name' do
     Artist.create(:name => 'Foo').rename('Bar')
 
