@@ -8,7 +8,7 @@ def model_constant(s)
   end
 end
 
-class Sequel::Model
+module Renameable
   def rename(new_name)
     klass = self.class
     existing = klass[:name => new_name]

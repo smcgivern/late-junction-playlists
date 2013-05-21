@@ -1,4 +1,5 @@
 class Artist < Sequel::Model
+  include Renameable
   many_to_many :playlist_tracks
 
   set_schema do

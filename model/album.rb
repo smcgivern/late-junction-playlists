@@ -1,4 +1,5 @@
 class Album < Sequel::Model
+  include Renameable
   one_to_many :playlist_tracks
 
   set_schema do
