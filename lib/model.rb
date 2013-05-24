@@ -17,6 +17,8 @@ module Renameable
     ds = playlist_tracks_dataset
 
     ds.update(ds.association_reflection[:key] => existing.id)
+
+    existing
   end
 
   def swap(other)

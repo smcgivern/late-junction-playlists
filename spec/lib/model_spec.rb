@@ -31,6 +31,19 @@ describe 'Sequel::Model.rename' do
     baz.playlist_tracks.length.should.equal 0
     quux.playlist_tracks.length.should.equal 1
   end
+
+  it 'should return either itself, or the existing item' do
+    baz = Track.create(:name => 'Baz')
+    quux = Track.create(:name => 'Quux')
+    foobar = Track.create(:name => 'Foobar')
+    quux_id = quux.id
+    foobar_id = foobar.id
+
+    baz.add_playlist_track(:played => Time.now)
+
+    baz.rename('Quux').id.should.equal quux_id
+    foobar.rename('Bazquux').id.should.equal foobar_id
+  end
 end
 
 describe 'Sequel::Model.swap' do
