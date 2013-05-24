@@ -110,3 +110,10 @@ get '/:type/:id/' do
 
   haml :item_page
 end
+
+post '/rename/' do
+  item = model_constant(params['type'])[params['id'].to_i].
+    rename(params['name'])
+
+  redirect  "/#{item.class.table_name}/#{item.id}/"
+end
