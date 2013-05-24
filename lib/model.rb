@@ -10,8 +10,7 @@ end
 
 module Renameable
   def rename(new_name)
-    klass = self.class
-    existing = klass[:name => new_name]
+    existing = self.class[:name => new_name]
 
     return update(:name => new_name) unless existing
 
