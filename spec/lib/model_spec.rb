@@ -44,6 +44,16 @@ describe 'Sequel::Model.rename' do
     baz.rename('Quux').id.should.equal quux_id
     foobar.rename('Bazquux').id.should.equal foobar_id
   end
+
+  it 'should allow multiple renames' do
+    foobar = Artist.create(:name => 'Foobar')
+    barbaz = Artist.create(:name => 'Barbaz')
+    bazquux = Artist.create(:name => 'Bazquux')
+
+    foobar.add_playlist_track(:played => Time.now)
+
+    foobar.rename('Barbaz').rename('Bazquux').name.should.equal 'Bazquux'
+  end
 end
 
 describe 'Sequel::Model.swap' do
