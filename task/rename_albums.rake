@@ -11,7 +11,7 @@ task :rename_albums do
 
   re = /\ATaken from the (#{froms.join('|')}):? /i
 
-  Album.all.each do |album|
+  Album.with_playlist_tracks.each do |album|
     album.rename(album.name.gsub(re, '')) if album.name =~ re
   end
 end
