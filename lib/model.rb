@@ -9,23 +9,29 @@ def model_constant(s)
 end
 
 module Renameable
-  def rename(new_name)
-    existing = self.class[:name => new_name]
+  module InstanceMethods
+    def rename(new_name)
+      existing = self.class[:name => new_name]
 
-    return update(:name => new_name) unless existing
+      return update(:name => new_name) unless existing
 
-    playlist_tracks.each do |pt|
-      remove_playlist_track(pt)
-      existing.add_playlist_track(pt)
+      playlist_tracks.each do |pt|
+        remove_playlist_track(pt)
+        existing.add_playlist_track(pt)
+      end
+
+      existing
     end
 
-    existing
+    def swap(other)
+      new_name = other.name
+
+      other.rename(name)
+      rename(new_name)
+    end
   end
 
-  def swap(other)
-    new_name = other.name
-
-    other.rename(name)
-    rename(new_name)
+  def self.included base
+    base.send :include, InstanceMethods
   end
 end
