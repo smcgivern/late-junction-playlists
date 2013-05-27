@@ -31,7 +31,17 @@ module Renameable
     end
   end
 
+  module ClassMethods
+    def with_playlist_tracks(query=nil)
+      (query ? where(query) : self).
+        eager(:playlist_tracks).
+        all.
+        select {|x| not x.playlist_tracks.empty?}
+    end
+  end
+
   def self.included base
     base.send :include, InstanceMethods
+    base.extend ClassMethods
   end
 end

@@ -69,3 +69,21 @@ describe 'Sequel::Model.swap' do
     Track.where(:name => 'Bar').all.length.should.equal 0
   end
 end
+
+describe 'Sequel::Model::with_playlist_tracks' do
+  before do
+    Composer.find_or_create(:name => 'Foobar')
+
+    Composer.
+      find_or_create(:name => 'Barbaz').
+      add_playlist_track(:played => Time.now)
+  end
+
+  it 'should return only the results of the query that have playlist tracks' do
+    Composer.with_playlist_tracks.map {|x| x.name}.should.equal ['Barbaz']
+  end
+
+  it 'should use the results of the query passed' do
+    Composer.with_playlist_tracks(:name.ilike('%foo%')).length.should.equal 0
+  end
+end
