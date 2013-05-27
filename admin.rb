@@ -68,14 +68,14 @@ get '/episodes/:slug/' do
 end
 
 get '/artists/contains-album/' do
-  @items = Artist.where(:name.ilike('%album%')).eager(:playlist_tracks).all
+  @items = Artist.with_playlist_tracks(:name.ilike('%album%'))
   @page_title = 'Artists with album in their name'
 
   haml :item_list
 end
 
 get '/albums/contains-taken-from/' do
-  @items = Album.where(:name.ilike('%taken from%')).eager(:playlist_tracks).all
+  @items = Album.with_playlist_tracks(:name.ilike('%taken from%'))
   @page_title = 'Albums with taken from in their name'
 
   haml :item_list
@@ -88,7 +88,7 @@ get '/albums/renameable/' do
            'promotional sampler', 'demo',
           ]
 
-  @items = Album.eager(:playlist_tracks).all.select do |album|
+  @items = Album.with_playlist_tracks.select do |album|
     album.name =~ /\ATaken from the (#{froms.join('|')}):? /
   end
 
@@ -98,7 +98,7 @@ get '/albums/renameable/' do
 end
 
 get '/:type/all/' do
-  @items = model_constant(params['type']).eager(:playlist_tracks).all
+  @items = model_constant(params['type']).with_playlist_tracks
   @page_title = "All #{params['type']}"
 
   haml :item_list
