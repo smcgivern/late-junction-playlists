@@ -9,7 +9,7 @@ task :rename_albums do
            'promotional sampler', 'demo',
           ]
 
-  re = /\ATaken from the (#{froms.join('|')}):? /
+  re = /\ATaken from the (#{froms.join('|')}):? /i
 
   Album.all.each do |album|
     album.rename(album.name.gsub(re, '')) if album.name =~ re
