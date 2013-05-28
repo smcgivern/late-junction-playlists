@@ -24,11 +24,13 @@ module LateJunction
 
   def self.html(uri, force=false)
     file = cache_filename(uri)
-    use_cache = (File.exist?(file) && !force)
+    use_cache = (File.exists?(file) && !force)
     to_open = use_cache ? file : uri
     page = open(to_open).read
 
     unless use_cache
+      FileUtils.mkdir_p(CACHE_DIRECTORY) unless File.exists?(CACHE_DIRECTORY)
+
       cached = open(file, 'w')
 
       cached.puts(page)
