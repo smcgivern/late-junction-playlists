@@ -68,6 +68,19 @@ describe 'LateJunction.html' do
   end
 
   it 'should add the file contents to the cache' do
+    dir = 'thisisatempdir'
+
+    with_const(LateJunction::CACHE_DIRECTORY, dir) do
+      LateJunction.html('spec/fixture/pips')
+
+      File.exist?(File.join(dir, 'spec-fixture-pips')).
+          should.equal true
+    end
+
+    FileUtils.remove_entry_secure(dir)
+  end
+
+  it "should create the cache directory if it doesn't exist" do
     dir = Dir.mktmpdir
 
     with_const(LateJunction::CACHE_DIRECTORY, dir) do
