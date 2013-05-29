@@ -36,6 +36,10 @@ module Renameable
       filter(*args) {|x| not x.playlist_tracks.empty?}
     end
 
+    def without_playlist_tracks(*args)
+      filter(*args) {|x| x.playlist_tracks.empty?}
+    end
+
     def filter(query=nil, &block)
       (query ? where(query) : self).
         eager(:playlist_tracks).
