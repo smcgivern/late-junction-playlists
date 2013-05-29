@@ -70,7 +70,7 @@ describe 'Sequel::Model.swap' do
   end
 end
 
-describe 'Sequel::Model::with_playlist_tracks' do
+describe 'Sequel::Model::filter' do
   before do
     Composer.find_or_create(:name => 'Foobar')
 
@@ -79,11 +79,13 @@ describe 'Sequel::Model::with_playlist_tracks' do
       add_playlist_track(:played => Time.now)
   end
 
-  it 'should return only the results of the query that have playlist tracks' do
-    Composer.with_playlist_tracks.map {|x| x.name}.should.equal ['Barbaz']
+  it 'should return only the results of the query that match the filter' do
+    Composer.filter {|x| not x.playlist_tracks.empty?}.map {|x| x.name}.
+      should.equal ['Barbaz']
   end
 
   it 'should use the results of the query passed' do
-    Composer.with_playlist_tracks(:name.ilike('%foo%')).length.should.equal 0
+    Composer.filter(:name.ilike('%baz%')) {|x| x.playlist_tracks.empty?}.length.
+      should.equal 0
   end
 end
