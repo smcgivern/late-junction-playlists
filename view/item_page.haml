@@ -1,3 +1,11 @@
+%form{:action => '/rename/'}
+  %input{:type => 'hidden', :name => 'type', :value => @item.class.table_name}
+  %input{:type => 'hidden', :name => 'id', :value => @item.id}
+  %p
+    %label{:for => 'name'} Rename to:
+    %input{:type => 'text', :name => 'name', :id => 'name',
+           :value => @item.name, :size => 20}
+
 %ol.playlist-tracks
   - @item.playlist_tracks.each do |pt|
     %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}
