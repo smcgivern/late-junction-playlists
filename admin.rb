@@ -5,6 +5,7 @@ require 'sinatra/reloader'
 require 'schema'
 
 DB = Database('admin.log')
+LOGS = Hash[[:rename, :swap].map {|x| [x, Logger.new("#{x}.log")]}]
 
 set :views, 'view'
 
@@ -115,14 +116,21 @@ post '/swap/' do
   a = model_constant(params['type_a'])[params['id_a'].to_i]
   b = model_constant(params['type_b'])[params['id_b'].to_i]
 
+  LOGS[:swap].info ['Swapping', a.class, a.name.inspect, 'with', b.class,
+                    b.name.inspect].join(' ')
+
   a.swap(b)
 
   redirect  "/#{a.class.table_name}/#{a.id}/"
 end
 
 post '/rename/' do
-  item = model_constant(params['type'])[params['id'].to_i].
-    rename(params['name'])
+  original = model_constant(params['type'])[params['id'].to_i]
 
-  redirect  "/#{item.class.table_name}/#{item.id}/"
+  LOGS[:rename].info ['Renaming', original.class, 'from', original.name.inspect,
+                      'to', params['name'].inspect].join(' ')
+
+  renamed = original.rename(params['name'])
+
+  redirect  "/#{renamed.class.table_name}/#{renamed.id}/"
 end
