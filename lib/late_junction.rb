@@ -54,7 +54,7 @@ module LateJunction
 
   def self.indices(source, uri=nil, force=nil)
     uri ||= START_PAGES[source]
-    page = html(uri)
+    page = html(uri, force)
 
     case source
     when :legacy
@@ -68,7 +68,7 @@ module LateJunction
     uris ||= indices(source, nil, force)
 
     uris.map do |uri|
-      page = html(uri)
+      page = html(uri, force)
 
       case source
       when :legacy
@@ -83,7 +83,7 @@ module LateJunction
     uris ||= episodes(source, nil, force)
 
     uris.map do |uri|
-      page = html(uri)
+      page = html(uri, force)
       playlist = {:uri => uri}
       text = inner_text(page)
 
