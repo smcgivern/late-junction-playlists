@@ -70,7 +70,7 @@ describe 'Sequel::Model.swap' do
   end
 end
 
-describe 'Sequel::Model::filter' do
+describe 'Sequel::Model::select' do
   before do
     Composer.find_or_create(:name => 'Foobar')
 
@@ -80,12 +80,12 @@ describe 'Sequel::Model::filter' do
   end
 
   it 'should return only the results of the query that match the filter' do
-    Composer.filter {|x| not x.playlist_tracks.empty?}.map {|x| x.name}.
+    Composer.select {|x| not x.playlist_tracks.empty?}.map {|x| x.name}.
       should.equal ['Barbaz']
   end
 
   it 'should use the results of the query passed' do
-    Composer.filter(:name.ilike('%baz%')) {|x| x.playlist_tracks.empty?}.length.
+    Composer.select(:name.ilike('%baz%')) {|x| x.playlist_tracks.empty?}.length.
       should.equal 0
   end
 end

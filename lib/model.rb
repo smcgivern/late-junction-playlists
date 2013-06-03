@@ -33,14 +33,14 @@ module Renameable
 
   module ClassMethods
     def with_playlist_tracks(*args)
-      filter(*args) {|x| not x.playlist_tracks.empty?}
+      select(*args) {|x| not x.playlist_tracks.empty?}
     end
 
     def without_playlist_tracks(*args)
-      filter(*args) {|x| x.playlist_tracks.empty?}
+      select(*args) {|x| x.playlist_tracks.empty?}
     end
 
-    def filter(query=nil, &block)
+    def select(query=nil, &block)
       (query ? where(query) : self).
         eager(:playlist_tracks).
         all.
