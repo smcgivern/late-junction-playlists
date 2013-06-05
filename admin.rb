@@ -1,4 +1,5 @@
 require 'haml'
+require 'json'
 require 'sass'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -116,8 +117,9 @@ post '/swap/' do
   a = model_constant(params['type_a'])[params['id_a'].to_i]
   b = model_constant(params['type_b'])[params['id_b'].to_i]
 
-  LOGS[:swap].info ['Swapping', a.class, a.name.inspect, 'with', b.class,
-                    b.name.inspect].join(' ')
+  LOGS[:swap].info ['Swap:',
+                    JSON.generate([a.class, a.name.inspect, b.class,
+                                   b.name.inspect])].join(' ')
 
   a.swap(b)
 
@@ -127,8 +129,9 @@ end
 post '/rename/' do
   original = model_constant(params['type'])[params['id'].to_i]
 
-  LOGS[:rename].info ['Renaming', original.class, 'from', original.name.inspect,
-                      'to', params['name'].inspect].join(' ')
+  LOGS[:rename].info ['Rename:',
+                      JSON.generate([original.class, original.name.inspect,
+                                     params['name']].inspect])].join(' ')
 
   renamed = original.rename(params['name'])
 
