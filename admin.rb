@@ -8,7 +8,7 @@ require 'schema'
 DB = Database('admin.log')
 LOGS = Hash[[:rename, :swap].map {|x| [x, Logger.new("tmp/log/#{x}.log")]}]
 
-set :views, 'view'
+set :views, 'view/admin'
 
 get '/style.css' do
   scss :style
