@@ -6,7 +6,7 @@ require 'sinatra/reloader'
 require 'schema'
 
 DB = Database('admin.log')
-LOGS = Hash[[:edit_date, :rename, :swap].
+LOGS = Hash[[:edit_date, :edit_presenter, :rename, :swap].
             map {|x| [x, Logger.new("tmp/log/#{x}.log")]}]
 
 set :views, 'view/admin'
@@ -145,6 +145,18 @@ post '/edit-date/' do
     JSON.generate([episode.slug, params['date']])
 
   episode.update(:date => DateTime.strptime(params['date'], '%Y-%m-%d'))
+
+  redirect  "/episodes/#{episode.slug}/"
+end
+
+post '/edit-presenter/' do
+  episode = Episode[params['id'].to_i]
+  presenter = Presenter[params['presenter'].to_i]
+
+  LOGS[:edit_presenter].info 'Edit presenter: ' +
+    JSON.generate([episode.slug, presenter.name])
+
+  episode.update(:presenter => presenter)
 
   redirect  "/episodes/#{episode.slug}/"
 end
