@@ -107,6 +107,16 @@ get '/:type/all/' do
   haml :item_list
 end
 
+get '/:type/all-caps/' do
+  @items = model_constant(params['type']).
+    with_playlist_tracks.
+    select {|x| x.name && x.name == x.name.upcase}
+
+  @page_title = "#{params['type'].gsub(/\A(.)/) {|x| x.upcase}} with names in caps"
+
+  haml :item_list
+end
+
 get '/:type/:id/' do
   @item = model_constant(params['type'])[params['id'].to_i]
   @page_title = @item.name
