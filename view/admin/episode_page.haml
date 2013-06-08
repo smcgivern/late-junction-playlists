@@ -1,5 +1,5 @@
 %h2
-  #{@episode.id} - #{@episode.presenter.name}
+  #{@episode.presenter.name}
 %ol.playlist-tracks
   - @episode.playlist_tracks.each do |pt|
     %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}
