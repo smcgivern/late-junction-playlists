@@ -23,7 +23,7 @@ def rename(type)
     rename(:artists)
 
   when :albums
-    Album.with_playlist_tracks do |album|
+    Album.with_playlist_tracks.each do |album|
       if album.name =~ re
         puts "Renaming #{album.name}"
 
@@ -32,7 +32,7 @@ def rename(type)
     end
 
   when :artists
-    Artist.with_playlist_tracks do |artist|
+    Artist.with_playlist_tracks.each do |artist|
       next unless artist.name =~ re
 
       artist_name = artist.name.gsub(re, '')
