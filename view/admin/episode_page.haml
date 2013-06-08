@@ -1,5 +1,11 @@
 %h2
   #{@episode.presenter.name}
+%form{:action => '/edit-date/', :method => 'POST'}
+  %input{:type => 'hidden', :name => 'id', :value => @episode.id}
+  %p
+    %label{:for => 'date'} Date:
+    %input{:type => 'text', :name => 'date', :id => 'date',
+           :placeholder => (@episode.date || '2000-01-01'), :size => 10}
 %ol.playlist-tracks
   - @episode.playlist_tracks.each do |pt|
     %li= haml :_playlist_track, :layout => false, :locals => {:playlist_track => pt}
