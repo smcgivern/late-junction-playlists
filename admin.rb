@@ -62,6 +62,20 @@ get '/episodes/missing-presenter/' do
   haml :episode_list
 end
 
+get '/episodes/shared-date/' do
+  zero = DateTime.new(2000, 1, 1)
+
+  @dates = DB[Episode.table_name].
+    to_hash_groups(:date, :id).
+    select {|k, v| v.length > 1}.
+    sort {|x, y| (x[0] || zero) <=> (y[0] || zero)}.
+    map {|x| [x[0], x[1].map {|z| Episode[z]}]}
+
+  @page_title = 'Episodes which share a date'
+
+  haml :shared_date
+end
+
 get '/episodes/:slug/' do
   @episode = Episode.by_slug(params['slug']).first
   @page_title = "#{@episode.id} - #{@episode.date}"

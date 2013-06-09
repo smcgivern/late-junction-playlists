@@ -1,0 +1,9 @@
+%ol
+  - @dates.each do |date|
+    %li
+      = date.first
+      %ul
+        - date.last.each do |episode|
+          %li
+            %a{:href => "/episodes/#{episode.slug}/"}><
+              #{episode.id} - #{episode.presenter.name} - #{episode.playlist_tracks.length}
