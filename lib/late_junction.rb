@@ -124,7 +124,7 @@ module LateJunction
     text.match(/(#{PRESENTERS.join('|')})/).to_s
   end
 
-  def self.tracks(source, text)
+  def self.tracks(source, text, time=nil)
     parsed_tracks = []
 
     text.reduce([[]]) do |groups, line|
@@ -134,10 +134,14 @@ module LateJunction
       groups
     end.reject do |x|
       x.empty?
-    end.each do |group|
-      next if (group.length < 3 or
-               group[0] == 'LATE JUNCTION' or
-               !group[0].match(/[0-9][0-9]\W[0-9][0-9]/))
+    end.each_with_index do |group, i|
+      next if (group.length < 3 or group[0] == 'LATE JUNCTION')
+
+      if time
+        group.unshift((time + (i * 180)).strftime('%H:%M'))
+      elsif !group[0].match(/[0-9][0-9]\W[0-9][0-9]/)
+        next
+      end
 
       # Fix lines that begin with a / by appending them to the previous line.
       group = group.reduce([]) {|g, l| (l[0..0] == '/' ? g.last : g) << l; g}
