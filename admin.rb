@@ -22,7 +22,9 @@ get '/' do
 end
 
 get '/episodes/all/' do
-  @episodes = Episode.eager(:playlist_tracks, :presenter).all
+  @episodes = Episode.eager(:playlist_tracks, :presenter).all.
+    sort {|x, y| x.date <=> y.date}
+
   @page_title = 'All episodes'
 
   haml :episode_list
@@ -43,7 +45,8 @@ get '/episodes/missing-playlist/' do
   @episodes = Episode.
     eager(:playlist_tracks, :presenter).
     all.
-    select {|e| e.playlist_tracks.length == 0 }
+    select {|e| e.playlist_tracks.length == 0 }.
+    sort {|x, y| x.date <=> y.date}
 
   @page_title = 'Episodes missing playlists'
 
