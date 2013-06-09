@@ -15,6 +15,12 @@ task :apply_log, :file do |t, args|
     when 'Swap'
       Object.const_get(data[0])[:name => data[1]].
         swap(Object.const_get(data[2])[:name => data[2]])
+    when 'Edit date'
+       Episode.by_slug(data[0]).
+        update(:date => DateTime.strptime(data[1], '%Y-%m-%d'))
+    when 'Edit presenter'
+       Episode.by_slug(data[0]).
+        update(:presenter => Presenter[:name => data[1]])
     end
   end
 end
