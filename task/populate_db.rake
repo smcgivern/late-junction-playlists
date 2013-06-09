@@ -1,12 +1,14 @@
-desc 'Populate database from JSON'
+desc "Populate database from JSON; files named 'manual' will load playlist only"
 task :populate_db, :file do |t, args|
   require 'json'
   require 'schema'
 
-  Database("#{args[:file].gsub(/\W/, '-')}-#{Time.now.strftime('%F-%T')}.log")
+  file = args[:file]
+  manual = file.include?('manual')
+  DB = Database("#{file.gsub(/\W/, '-')}-#{Time.now.strftime('%F-%T')}.log")
 
   JSON.parse(open(args[:file]).read).each do |ep|
-    if ep.nil? || Episode.first(:uri => ep['uri'])
+    if ep.nil? || (Episode.first(:uri => ep['uri']) && !manual)
       puts "Skipping #{ep && ep['uri']}"
 
       next
@@ -14,12 +16,16 @@ task :populate_db, :file do |t, args|
 
     puts "Processing #{ep['uri']}"
 
-    presenter = Presenter.find_or_create(:name => ep['presenter'])
-    episode = Episode.create(:presenter => presenter,
-                             :uri => ep['uri'],
-                             :date => ep['date'],
-                             :name => ep['title'],
-                             :description => ep['description'])
+    if manual
+      episode = Episode.by_slug(ep['uri']).first
+    else
+      presenter = Presenter.find_or_create(:name => ep['presenter'])
+      episode = Episode.create(:presenter => presenter,
+                               :uri => ep['uri'],
+                               :date => ep['date'],
+                               :name => ep['title'],
+                               :description => ep['description'])
+    end
 
     ep['tracks'].each do |tr|
       next unless tr
