@@ -7,7 +7,7 @@ task :gc do
     klass.without_playlist_tracks.each do |item|
       puts "Deleting #{klass} #{item.name.inspect}"
 
-      item.delete
+      item.destroy
     end
   end
 end
