@@ -85,7 +85,8 @@ describe 'Sequel::Model::select' do
   end
 
   it 'should use the results of the query passed' do
-    Composer.select(:name.ilike('%baz%')) {|x| x.playlist_tracks.empty?}.length.
+    Composer.
+      select(Sequel.ilike(:name, '%baz%')) {|x| x.playlist_tracks.empty?}.length.
       should.equal 0
   end
 end

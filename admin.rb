@@ -88,14 +88,14 @@ get '/episodes/:slug/' do
 end
 
 get '/artists/contains-album/' do
-  @items = Artist.with_playlist_tracks(:name.ilike('%album%'))
+  @items = Artist.with_playlist_tracks(Sequel.ilike(:name, '%album%'))
   @page_title = 'Artists with album in their name'
 
   haml :item_list
 end
 
 get '/albums/contains-taken-from/' do
-  @items = Album.with_playlist_tracks(:name.ilike('%taken from%'))
+  @items = Album.with_playlist_tracks(Sequel.ilike(:name, '%taken from%'))
   @page_title = 'Albums with taken from in their name'
 
   haml :item_list
