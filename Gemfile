@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'bacon'
 gem 'haml'
 gem 'json'
 gem 'nokogiri', '~> 1.5.0'
 gem 'sass'
 gem 'sequel'
 gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'thin'
