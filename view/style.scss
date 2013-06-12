@@ -1,0 +1,39 @@
+$body-font: "Palatino Linotype", "Palatino", "URW Palladio L", "Book Antiqua", "Baskerville", "Bitstream Charter", "Garamond", "Georgia", serif;
+
+$header-font: "Gill Sans", "Gill Sans MT", "GillSans", "Calibri", "Trebuchet MS", sans-serif;
+
+body, input, select {
+  font-family: $body-font;
+  color: #000;
+  background: #fff;
+}
+
+body {
+  font-size: 105%;
+  margin: 0em auto;
+  padding: 0em 1em;
+  max-width: 50em;
+  line-height: 1.6;
+}
+
+input, select {
+  font-size: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+  text-align: center;
+  clear: both;
+}
+
+:link, :link:active, :link:hover, .click {
+  color: #0000ff;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+:link:visited {
+  color: h#800080;
+  background: transparent;
+}
