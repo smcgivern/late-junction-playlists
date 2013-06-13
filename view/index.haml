@@ -1,1 +1,4 @@
-%p Late Junction playlists
+%h2 Presenters
+%ul
+  - @presenters.each do |presenter|
+    %li= presenter.name.inspect
