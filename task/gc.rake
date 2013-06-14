@@ -34,4 +34,12 @@ task :gc do
       item.destroy
     end
   end
+
+  Presenter.each do |presenter|
+    if presenter.episodes.length == 0
+      puts "Deleting presenter #{[presenter.id, presenter.name]}"
+
+      presenter.destroy
+    end
+  end
 end
