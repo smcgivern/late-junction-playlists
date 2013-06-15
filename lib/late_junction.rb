@@ -23,6 +23,10 @@ module LateJunction
     File.join(CACHE_DIRECTORY, uri.gsub(/\W/, '-'))
   end
 
+  def self.uncache(uri)
+    File.unlink(cache_filename(uri))
+  end
+
   def self.html(uri, force=false)
     file = cache_filename(uri)
     use_cache = (File.exists?(file) && !force)
@@ -99,7 +103,11 @@ module LateJunction
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
       when :current
-        next unless (date_text = page.at('#last-on .details'))
+        unless (date_text = page.at('#last-on .details'))
+          self.uncache(uri)
+
+          next
+        end
 
         playlist[:date] = DateTime.strptime(date_text['content'], '%Y-%m-%d')
 

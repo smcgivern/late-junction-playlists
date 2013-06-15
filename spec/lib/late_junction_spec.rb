@@ -33,6 +33,27 @@ describe 'LateJunction.cache_filename' do
   end
 end
 
+describe 'LateJunction.uncache' do
+  it 'should remove a URI from the cache' do
+    dir = Dir.mktmpdir
+    filename = File.join(dir, 'foo')
+    file = open(filename, 'w')
+
+    file.puts('Foo')
+    file.flush
+
+    with_const(LateJunction::CACHE_DIRECTORY, dir) do
+      File.exist?(filename).should.equal true
+
+      LateJunction.uncache('foo')
+
+      File.exist?(filename).should.equal false
+    end
+
+    FileUtils.remove_entry_secure(dir)
+  end
+end
+
 describe 'LateJunction.html' do
   it 'should return the parsed HTML' do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
@@ -214,6 +235,24 @@ describe 'LateJunction.playlists' do
 
       LateJunction.playlists(:legacy, uris)[0].
         should.equal @legacy[1]
+    end
+
+    it 'should uncache any future episodes' do
+      dir = Dir.mktmpdir
+      uri = 'http://www.bbc.co.uk/programmes/b02x995v'
+      filename = LateJunction.cache_filename(uri)
+
+      with_const(LateJunction::CACHE_DIRECTORY, dir) do
+        FileUtils.copy(filename, LateJunction.cache_filename(uri))
+
+        File.exist?(LateJunction.cache_filename(uri)).should.equal true
+
+        LateJunction.playlists(:current, [uri])
+
+        File.exist?(LateJunction.cache_filename(uri)).should.equal false
+      end
+
+      FileUtils.remove_entry_secure(dir)
     end
   end
 end
