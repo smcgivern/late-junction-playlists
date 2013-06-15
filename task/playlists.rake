@@ -1,14 +1,15 @@
 desc 'Pull all playlists from source, leaving info as JSON in tmp/'
-task :playlists, :source do |t, args|
+task :playlists, :source, :since do |t, args|
   require 'lib/late_junction'
   require 'json'
 
-  args.with_defaults(:source => 'legacy')
+  args.with_defaults(:source => 'legacy', :since => '')
 
   filename = "tmp/#{args[:source]}-#{Time.now.strftime('%F-%T')}.json"
+  playlists = LateJunction.playlists(args[:source].to_sym).
+    select {|x| x && x[:date].to_s >= args[:since]}
 
-  open(filename, 'w').
-    puts(JSON.pretty_generate(LateJunction.playlists(args[:source].to_sym)))
+  open(filename, 'w').puts(JSON.pretty_generate(playlists))
 
   puts filename
 end
