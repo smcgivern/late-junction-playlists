@@ -19,7 +19,9 @@ task :populate_db, :file do |t, args|
     if manual
       episode = Episode.by_slug(ep['uri']).first
     else
-      presenter = Presenter.find_or_create(:name => ep['presenter'])
+      (presenter_name = ep['presenter']).empty? || presenter_name = 'Unknown'
+
+      presenter = Presenter.find_or_create(:name => presenter_name)
       episode = Episode.create(:presenter => presenter,
                                :uri => ep['uri'],
                                :date => ep['date'],
