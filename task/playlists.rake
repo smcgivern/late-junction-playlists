@@ -19,5 +19,10 @@ task :new_playlists do
   require 'lib/late_junction'
 
   LateJunction.episodes(:current, nil, :force)
-  Rake::Task[:playlists].invoke(:current)
+  Rake::Task[:playlists].invoke(:current, '2012')
+end
+
+desc 'Update DB using the new playlists'
+task :update => [:backup_db, :new_playlists] do
+  Rake::Task[:populate_db].invoke(Dir['tmp/current-*.json'].sort.last)
 end
