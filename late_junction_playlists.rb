@@ -1,12 +1,4 @@
-require 'haml'
-require 'json'
-require 'sass'
-require 'sinatra'
-require 'schema'
-
-DB = Database('production.log')
-
-set :views, 'view/'
+require 'setup'
 
 get '/style.css' do
   scss :style
