@@ -19,6 +19,12 @@ class Episode < Sequel::Model
     date.strftime('%e %B %Y').strip
   end
 
+  def sorted_playlist_tracks
+    key = playlist_tracks.all? {|x| x.played} ? :played : :id
+
+    playlist_tracks.sort_by {|x| x.send(key)}
+  end
+
   def slug
     uri.split('/').last
   end
