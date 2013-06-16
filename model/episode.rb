@@ -15,6 +15,10 @@ class Episode < Sequel::Model
 
   create_table?
 
+  def title_date
+    date.strftime('%e %B %Y').strip
+  end
+
   def slug
     uri.split('/').last
   end
