@@ -110,9 +110,12 @@ module LateJunction
         end
 
         playlist[:date] = DateTime.strptime(date_text['content'], '%Y-%m-%d')
-
         playlist[:title] = text['h1.episode-title']
         playlist[:presenter] = presenter(playlist[:title])
+
+        if playlist[:presenter].empty?
+          playlist[:presenter] = presenter(text['#synopsis'])
+        end
 
         if (segments = page.at('#segments'))
           playlist[:description] = text['#synopsis']
