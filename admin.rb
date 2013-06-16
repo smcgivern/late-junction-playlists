@@ -21,7 +21,7 @@ get '/' do
   haml :index
 end
 
-get '/episodes/all/' do
+get '/episode/all/' do
   @episodes = Episode.eager(:playlist_tracks, :presenter).all.
     sort {|x, y| x.date <=> y.date}
 
@@ -30,7 +30,7 @@ get '/episodes/all/' do
   haml :episode_list
 end
 
-get '/episodes/missing-date/' do
+get '/episode/missing-date/' do
   @episodes = Episode.
     where(:date => nil).
     eager(:playlist_tracks, :presenter).
@@ -41,7 +41,7 @@ get '/episodes/missing-date/' do
   haml :episode_list
 end
 
-get '/episodes/missing-playlist/' do
+get '/episode/missing-playlist/' do
   @episodes = Episode.
     eager(:playlist_tracks, :presenter).
     all.
@@ -53,7 +53,7 @@ get '/episodes/missing-playlist/' do
   haml :episode_list
 end
 
-get '/episodes/missing-presenter/' do
+get '/episode/missing-presenter/' do
   @episodes = Episode.
     where(:presenter => Presenter.where(Sequel.|({:name => nil},
                                                  {:name => ''}))).
@@ -65,7 +65,7 @@ get '/episodes/missing-presenter/' do
   haml :episode_list
 end
 
-get '/episodes/shared-date/' do
+get '/episode/shared-date/' do
   zero = DateTime.new(2000, 1, 1)
 
   @dates = DB[Episode.table_name].
@@ -79,7 +79,7 @@ get '/episodes/shared-date/' do
   haml :shared_date
 end
 
-get '/episodes/:slug/' do
+get '/episode/:slug/' do
   @episode = Episode.by_slug(params['slug'])
   @page_title = "#{@episode.id} - #{@episode.date}"
   @title_link = @episode.uri
@@ -87,21 +87,21 @@ get '/episodes/:slug/' do
   haml :episode_page
 end
 
-get '/artists/contains-album/' do
+get '/artist/contains-album/' do
   @items = Artist.with_playlist_tracks(Sequel.ilike(:name, '%album%'))
   @page_title = 'Artists with album in their name'
 
   haml :item_list
 end
 
-get '/albums/contains-taken-from/' do
+get '/album/contains-taken-from/' do
   @items = Album.with_playlist_tracks(Sequel.ilike(:name, '%taken from%'))
   @page_title = 'Albums with taken from in their name'
 
   haml :item_list
 end
 
-get '/albums/renameable/' do
+get '/album/renameable/' do
   froms = [
            'album', 'compilation', 'EP', 'single', 'promo', 'sampler',
            'box set', 'opera', 'CD', 'sountrack', 'LP', 'OST',
