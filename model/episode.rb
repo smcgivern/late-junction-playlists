@@ -20,6 +20,6 @@ class Episode < Sequel::Model
   end
 
   def self.by_slug(s)
-    where { :uri.like("%#{s}") }
+    where { Sequel.like(:uri, "%/#{s}") }
   end
 end
