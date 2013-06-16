@@ -1,0 +1,5 @@
+{
+    "admin_email": "late-junction-playlists@example.com",
+    "root": "late-junction-playlists",
+    "sinatra_log": "tmp/log/sinatra.log"
+}
