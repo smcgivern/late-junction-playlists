@@ -1,6 +1,6 @@
 require 'setup'
 
-get '/style.css' do
+get '/ext/style.css' do
   scss :style
 end
 
