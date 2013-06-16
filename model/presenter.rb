@@ -7,4 +7,12 @@ class Presenter < Sequel::Model
   end
 
   create_table?
+
+  def slug
+    name.downcase.gsub(/\W/, '-')
+  end
+
+  def self.by_slug(s)
+    first { Sequel.ilike(:name, s.gsub(/\W/, ' ')) }
+  end
 end
