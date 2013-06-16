@@ -1,6 +1,6 @@
 class Episode < Sequel::Model
   many_to_one :presenter
-  one_to_many :playlist_tracks
+  one_to_many :playlist_tracks, :eager => [:album, :artists, :composer, :track]
 
   set_schema do
     primary_key :id
