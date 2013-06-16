@@ -80,7 +80,7 @@ get '/episodes/shared-date/' do
 end
 
 get '/episodes/:slug/' do
-  @episode = Episode.by_slug(params['slug']).first
+  @episode = Episode.by_slug(params['slug'])
   @page_title = "#{@episode.id} - #{@episode.date}"
   @title_link = @episode.uri
 
