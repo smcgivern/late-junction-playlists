@@ -37,3 +37,86 @@ h1, h2, h3, h4, h5, h6 {
   color: #800080;
   background: transparent;
 }
+
+.colour {
+  :link, :link:active, :link:hover, :link:visited, .click {
+    text-decoration: none;
+  }
+}
+
+.presenter-list {
+  list-style: none;
+  text-align: center;
+  padding: 0em;
+  margin: 0em;
+
+  li {
+    width: 12em;
+    margin: 0.2em 0.1em;
+    display: inline-block;
+
+    h3, p {
+      margin: 0.5em;
+    }
+  }
+}
+
+.colour-0 {
+  color: inherit;
+  background: #8dd3c7;
+}
+
+.colour-1 {
+  color: inherit;
+  background: #ffffbc;
+}
+
+.colour-2 {
+  color: inherit;
+  background: #bebada;
+}
+
+.colour-3 {
+  color: inherit;
+  background: #fb8072;
+}
+
+.colour-4 {
+  color: inherit;
+  background: #80b1d3;
+}
+
+.colour-5 {
+  color: inherit;
+  background: #fdb462;
+}
+
+.colour-6 {
+  color: inherit;
+  background: #b3de69;
+}
+
+.colour-7 {
+  color: inherit;
+  background: #fccde5;
+}
+
+.colour-8 {
+  color: inherit;
+  background: #d9d9d9;
+}
+
+.colour-9 {
+  color: inherit;
+  background: #bc80bd;
+}
+
+.colour-10 {
+  color: inherit;
+  background: #ccebc5;
+}
+
+.colour-11 {
+  color: inherit;
+  background: #ffed6f;
+}

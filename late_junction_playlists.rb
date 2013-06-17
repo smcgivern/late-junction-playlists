@@ -10,3 +10,10 @@ get '/' do
 
   haml :index
 end
+
+get '/presenter/' do
+  @presenters = Presenter.eager(:episodes).all.sort_by {|x| -x.episodes.length}
+  @page_title = 'Late Junction presenters'
+
+  haml :presenter_list
+end
