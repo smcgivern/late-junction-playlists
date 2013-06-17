@@ -11,10 +11,6 @@ get '/' do
   haml :index
 end
 
-get '/episode/' do
-  redirect r('/')
-end
-
 get '/episode/:slug/' do
   @episode = Episode.by_slug(params['slug'])
   @page_title = "#{@episode.title_date} - #{@episode.presenter.name}"
@@ -73,6 +69,11 @@ get %r{/(20\d\d)/} do
   @range = Date.new(year)..Date.new(year, -1, -1)
   @episodes = Episode.where(:date => @range).to_hash(:date)
   @page_title = "Late Junction episodes for #{year}"
+  @menu = menu("/#{year}/")
 
   haml :year
+end
+
+get %r{/(album|artist|composer|episode|track)/} do
+  redirect r('/')
 end
