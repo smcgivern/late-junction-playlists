@@ -29,6 +29,14 @@ get '/presenter/' do
   haml :presenter_list
 end
 
+get %r{/(album|artist|composer|track)/(\d+)/} do
+  @type, id = *params[:captures]
+  @item = model_constant(@type)[id.to_i]
+  @page_title = @item.name
+
+  haml :item
+end
+
 # Day (not linked; redirects to day's episode if there is one, otherwise month).
 get %r{/(20\d\d)/([01]\d)/([0123]\d)/} do
   year, month, day = *params[:captures]
