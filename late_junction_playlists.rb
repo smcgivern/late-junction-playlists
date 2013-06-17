@@ -29,6 +29,16 @@ get '/presenter/' do
   haml :presenter_list
 end
 
+get '/presenter/:slug/' do
+  @presenter = Presenter.by_slug(params['slug'])
+  @episodes = Episode.where(:presenter => @presenter).to_hash(:date)
+  min, max = *[:min, :max].map {|x| @episodes.keys.send(x)}
+  @range = Date.new(min.year, min.month)..Date.new(max.year, max.month, -1)
+  @page_title = "Late Junction episodes presented by #{@presenter.name}"
+
+  haml :presenter
+end
+
 get %r{/(album|artist|composer|track)/(\d+)/} do
   @type, id = *params[:captures]
   @item = model_constant(@type)[id.to_i]
