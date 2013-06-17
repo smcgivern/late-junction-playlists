@@ -9,7 +9,11 @@ task :playlists, :source, :since do |t, args|
   playlists = LateJunction.playlists(args[:source].to_sym).
     select {|x| x && x[:date].to_s >= args[:since]}
 
-  open(filename, 'w').puts(JSON.pretty_generate(playlists))
+  file = open(filename, 'w')
+
+  file.puts(JSON.pretty_generate(playlists))
+  file.flush
+  file.close
 
   puts filename
 end
