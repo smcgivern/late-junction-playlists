@@ -13,10 +13,10 @@
   %caption
     %h3
       - if mini
-        %a{:href => "/#{first.strftime('%Y/%m')}/"}= first.strftime(format)
+        %a{:href => r("/#{first.strftime('%Y/%m')}/")}= first.strftime(format)
       - else
         = first.strftime('%B')
-        %a{:href => "/#{first.year}/"}= first.year
+        %a{:href => r("/#{first.year}/")}= first.year
 
   %thead
     %tr
@@ -44,7 +44,7 @@
           - episode = episodes[day]
           - if episode
             %td{:class => ["colour-#{episode.presenter.seq}", 'colour']}
-              %a{:href => "/episode/#{episode.slug}/",
+              %a{:href => r("/episode/#{episode.slug}/"),
                  :title => episode.presenter.name}
                 .date= day.strftime('%e')
                 - if not mini

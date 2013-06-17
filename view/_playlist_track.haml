@@ -6,25 +6,25 @@
   - unless skip[:track]
     %dt Track
     %dd
-      %a{:href => "/track/#{playlist_track.track.id}/"}
+      %a{:href => r("/track/#{playlist_track.track.id}/")}
         = playlist_track.track.name
   - unless skip[:artists]
     %dt Artists
     - playlist_track.artists.each do |pta|
       %dd
-        %a{:href => "/artist/#{pta.id}/"}= pta.name
+        %a{:href => r("/artist/#{pta.id}/")}= pta.name
   - unless skip[:album]
     %dt Album
     %dd
-      %a{:href => "/album/#{playlist_track.album.id}/"}
+      %a{:href => r("/album/#{playlist_track.album.id}/")}
         = playlist_track.album.name
   - if playlist_track.composer.name and not skip[:composer]
     %dt Composer
     %dd
-      %a{:href => "/composer/#{playlist_track.composer.id}/"}
+      %a{:href => r("/composer/#{playlist_track.composer.id}/")}
         = playlist_track.composer.name
   - unless skip[:episode]
     %dt Episode
     %dd
-      %a{:href => "/episode/#{playlist_track.episode.slug}/"}
+      %a{:href => r("/episode/#{playlist_track.episode.slug}/")}
         = playlist_track.episode.title_date
