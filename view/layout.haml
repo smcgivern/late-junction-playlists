@@ -4,6 +4,7 @@
     %title= @page_title.map {|x| x.first}.join(' ')
     %link{:href => r('/ext/style.css'), :rel => 'stylesheet',
           :type => 'text/css'}
+    %link{:href => r('/ext/app-icon.png'), :rel => 'apple-touch-icon'}
   %body
     %h1
       - @page_title.each do |segment|
