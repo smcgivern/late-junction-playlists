@@ -1,10 +1,11 @@
 -# Parameters: first (first day of month); mini (link days and don't
 -# show presenter name, title link goes to calendar page); episodes (hash by
--# date).
+-# date); format (date format for use in header).
 
 - last = Date.new(first.year, first.month, -1)
 - mini ||= nil
 - episodes = Hash[episodes.select {|d, e| d.between?(first, last)}]
+- format ||= '%B'
 - offset = first.wday
 - point = 0
 
@@ -12,7 +13,7 @@
   - if mini
     %caption
       %h3
-        %a{:href => "/#{first.strftime('%Y/%m')}/"}= first.strftime("%B")
+        %a{:href => "/#{first.strftime('%Y/%m')}/"}= first.strftime(format)
 
   %thead
     %tr
