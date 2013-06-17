@@ -11,6 +11,14 @@
           %a{:href => segment[1], :title => segment[2]}= segment.first
         - else
           = segment
+    %nav
+      %ul
+        - (@menu || menu).each do |segment|
+          %li
+            - if segment.length > 1
+              %a{:href => segment[1], :title => segment[2]}= segment[0]
+            - else
+              = segment[0]
     = yield
     %footer#byline
       By

@@ -38,6 +38,19 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 
+nav {
+  text-align: center;
+
+  ul {
+    list-style: none;
+    padding-left: 0em;
+
+    li {
+      display: inline;
+    }
+  }
+}
+
 .colour {
   :link, :link:active, :link:hover, :link:visited, .click {
     text-decoration: none;

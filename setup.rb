@@ -34,4 +34,13 @@ helpers do
 
     (s =~ /^\// && !(s =~ /^\/#{t}/)) ? "/#{t}#{s}" : s
   end
+
+  def menu(exclude=false)
+    (
+     [['Home', '/'], ['Presenters', '/presenter/'], ['By year:']] +
+     DATES.map {|x| x.year}.uniq.sort.reverse.map {|x| [x, "/#{x}/"]}
+     ).
+      reject {|x| exclude == x[1]}.
+      map {|x, y| [x, y && r(y)]}
+  end
 end

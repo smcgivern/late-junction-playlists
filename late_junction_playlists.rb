@@ -7,6 +7,7 @@ end
 get '/' do
   @page_title = 'Late Junction playlists'
   @presenters = Presenter.all.select {|x| x.episodes.length > 0}
+  @menu = menu('/')
 
   haml :index
 end
@@ -24,6 +25,7 @@ end
 get '/presenter/' do
   @presenters = Presenter.eager(:episodes).all.sort_by {|x| -x.episodes.length}
   @page_title = 'Late Junction presenters'
+  @menu = menu('/presenter/')
 
   haml :presenter_list
 end
