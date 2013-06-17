@@ -2,7 +2,7 @@
   - skip ||= {}
   - if playlist_track.played and not skip[:played]
     %dt Played at
-    %dd= playlist_track.played.strftime('%H:%M')
+    %dd= playlist_track.played.utc.strftime('%H:%M')
   - unless skip[:track]
     %dt Track
     %dd
