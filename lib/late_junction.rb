@@ -209,11 +209,12 @@ module LateJunction
   def self.structured_tracks(segments, start_time)
     segments.css('li.segment.track').map do |segment|
       text = inner_text(segment)
+      play_time = text['.play-time']
 
       next unless (artists = text['.artist'])
 
       {
-        :time => add_time(start_time, text['.play-time']),
+        :time => play_time && add_time(start_time, play_time),
         :artists => artists.split(/ *\/ */),
         :title => text['.title'],
         :album => text['.release-title'],
