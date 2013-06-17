@@ -1,5 +1,6 @@
 require 'haml'
 require 'json'
+require 'kramdown'
 require 'sass'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -22,6 +23,14 @@ DATES = Range.new(*[:min, :max].map {|x| Date.parse(Episode.send(x, :date))})
 set :haml, {:format => :html5}
 set :views, "#{File.dirname(__FILE__)}/view"
 set :static_cache_control, [:public, {:max_age => 86400}]
+
+module Kramdown
+  include Haml::Filters::Base
+
+  def render(text)
+    ::Kramdown::Document.new(text).to_html
+  end
+end
 
 helpers do
   include Rack::Utils

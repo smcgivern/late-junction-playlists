@@ -8,6 +8,7 @@ GEM
     haml (4.0.3)
       tilt
     json (1.8.0)
+    kramdown (0.14.0)
     nokogiri (1.5.10)
     rack (1.5.2)
     rack-protection (1.5.0)
@@ -41,6 +42,7 @@ DEPENDENCIES
   bacon
   haml
   json
+  kramdown
   nokogiri (~> 1.5.0)
   sass
   sequel
