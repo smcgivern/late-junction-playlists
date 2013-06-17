@@ -5,8 +5,10 @@ get '/ext/style.css' do
 end
 
 get '/' do
+  year, month = *[:year, :month].map {|x| DATES.max.send(x)}
+  @range = Date.new(year, month)..Date.new(year, month, -1)
+  @episodes = Episode.where(:date => @range).to_hash(:date)
   @page_title = 'Late Junction playlists'
-  @presenters = Presenter.all.select {|x| x.episodes.length > 0}
   @menu = menu('/')
 
   haml :index
