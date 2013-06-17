@@ -15,6 +15,21 @@ module LateJunction
     :current => 'http://www.bbc.co.uk/programmes/b006tp52/broadcasts',
   }
 
+  def self.add_time(a, b)
+    h, m, i, n = *"#{a}:#{b}".split(':').map {|x| x.to_i}
+    x = h + i
+    y = m + n
+
+    if y >= 60
+      x += 1
+      y -= 60
+    end
+
+    x -= 24 if x >= 24
+
+    "%02d:%02d" % [x, y]
+  end
+
   def self.absolute(base)
     lambda {|x| URI.join(base, x['href']).to_s}
   end
@@ -119,7 +134,8 @@ module LateJunction
 
         if (segments = page.at('#segments'))
           playlist[:description] = text['#synopsis']
-          playlist[:tracks] = structured_tracks(segments)
+          playlist[:tracks] = structured_tracks(segments,
+                                                date_text.match(/\d\d:\d\d/)[0])
         else
           playlist[:description] = text['#episode-summary']
           playlist[:tracks] = tracks(source,
@@ -190,14 +206,14 @@ module LateJunction
     parsed_tracks
   end
 
-  def self.structured_tracks(segments)
+  def self.structured_tracks(segments, start_time)
     segments.css('li.segment.track').map do |segment|
       text = inner_text(segment)
 
       next unless (artists = text['.artist'])
 
       {
-        :time => text['.play-time'],
+        :time => add_time(start_time, text['.play-time']),
         :artists => artists.split(/ *\/ */),
         :title => text['.title'],
         :album => text['.release-title'],

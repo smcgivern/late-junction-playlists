@@ -12,6 +12,24 @@ def with_const(constant, new)
   constant[0..-1] = previous
 end
 
+describe 'LateJunction.add_time' do
+  it 'should add two times as strings' do
+    LateJunction.add_time('23:15', '00:00').should.equal '23:15'
+  end
+
+  it 'should wrap around hours' do
+    LateJunction.add_time('22:15', '00:45').should.equal '23:00'
+  end
+
+  it 'should wrap around days' do
+    LateJunction.add_time('23:15', '02:42').should.equal '01:57'
+  end
+
+  it 'should pad with zeroes' do
+    LateJunction.add_time('23:15', '00:45').should.equal '00:00'
+  end
+end
+
 describe 'LateJunction.absolute' do
   it 'should return a block for converting the href to an absolute URI' do
     absolute = LateJunction.absolute('http://www.bbc.co.uk')
@@ -340,13 +358,13 @@ describe 'LateJunction.structured_tracks' do
       @current = ['b00xfg3p'].
         map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
         map {|x| LateJunction.html(x).at('#segments') }.
-        map {|x| LateJunction.structured_tracks(x) }
+        map {|x| LateJunction.structured_tracks(x, '23:15') }
     end
   end
 
   it 'should pull in as much track info as possible' do
     before_night = {
-      :time => '01:33',
+      :time => '00:48',
       :artists => ['Ensemble'],
       :title => 'Before Night',
       :album => 'Excerpts',
