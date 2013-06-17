@@ -10,10 +10,13 @@
 - point = 0
 
 %table.calendar
-  - if mini
-    %caption
-      %h3
+  %caption
+    %h3
+      - if mini
         %a{:href => "/#{first.strftime('%Y/%m')}/"}= first.strftime(format)
+      - else
+        = first.strftime('%B')
+        %a{:href => "/#{first.year}/"}= first.year
 
   %thead
     %tr
