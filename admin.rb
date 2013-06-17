@@ -162,7 +162,7 @@ post '/rename/' do
 
   renamed = original.rename(params['name'])
 
-  redirect  "/#{renamed.class.table_name}/#{renamed.id}/"
+  redirect  "/#{renamed.class.table_name.gsub(/(.)$/, '')}/#{renamed.id}/"
 end
 
 post '/edit-date/' do
@@ -173,7 +173,7 @@ post '/edit-date/' do
 
   episode.update(:date => DateTime.strptime(params['date'], '%Y-%m-%d'))
 
-  redirect  "/episodes/#{episode.slug}/"
+  redirect  "/episode/#{episode.slug}/"
 end
 
 post '/edit-presenter/' do
@@ -185,5 +185,5 @@ post '/edit-presenter/' do
 
   episode.update(:presenter => presenter)
 
-  redirect  "/episodes/#{episode.slug}/"
+  redirect  "/episode/#{episode.slug}/"
 end
