@@ -39,8 +39,8 @@ end
 
 # Day (not linked; redirects to day's episode if there is one, otherwise month).
 get %r{/(20\d\d)/([01]\d)/([0123]\d)/} do
-  year, month, day = *params[:captures]
-  episode = Episode[:date => Date.new(*[year, month, day].map {|x| x.to_i})]
+  year, month, day = *params[:captures].map {|x| x.to_i}
+  episode = Episode[:date => Date.new(year, month, day)]
 
   redirect r(episode ? "/episode/#{episode.slug}/" : "/#{year}/#{month}/")
 end
