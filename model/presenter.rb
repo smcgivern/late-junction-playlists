@@ -4,6 +4,7 @@ class Presenter < Sequel::Model
   set_schema do
     primary_key :id
     String :name
+    Integer :seq
   end
 
   create_table?
