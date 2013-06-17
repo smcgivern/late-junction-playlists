@@ -1,0 +1,5 @@
+%ol.playlist-tracks
+  - @episode.sorted_playlist_tracks.each do |pt|
+    %li
+      = haml :_playlist_track, :layout => false,
+               :locals => {:skip => {:episode => true}, :playlist_track => pt}

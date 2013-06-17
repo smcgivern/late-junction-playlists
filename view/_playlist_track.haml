@@ -1,0 +1,30 @@
+%dl.playlist-track
+  - skip ||= {}
+  - if playlist_track.played and not skip[:played]
+    %dt Played at
+    %dd= playlist_track.played.strftime('%H:%M')
+  - unless skip[:track]
+    %dt Track
+    %dd
+      %a{:href => "/track/#{playlist_track.track.id}/"}
+        = playlist_track.track.name
+  - unless skip[:artists]
+    %dt Artists
+    - playlist_track.artists.each do |pta|
+      %dd
+        %a{:href => "/artist/#{pta.id}/"}= pta.name
+  - unless skip[:album]
+    %dt Album
+    %dd
+      %a{:href => "/album/#{playlist_track.album.id}/"}
+        = playlist_track.album.name
+  - if playlist_track.composer.name and not skip[:composer]
+    %dt Composer
+    %dd
+      %a{:href => "/composer/#{playlist_track.composer.id}/"}
+        = playlist_track.composer.name
+  - unless skip[:episode]
+    %dt Episode
+    %dd
+      %a{:href => "/episode/#{playlist_track.episode.slug}/"}
+        = playlist_track.episode.title_date

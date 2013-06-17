@@ -11,6 +11,17 @@ get '/' do
   haml :index
 end
 
+get '/episode/' do
+  redirect r('/')
+end
+
+get '/episode/:slug/' do
+  @episode = Episode.by_slug(params['slug'])
+  @page_title = "#{@episode.title_date} - #{@episode.presenter.name}"
+
+  haml :episode
+end
+
 get '/presenter/' do
   @presenters = Presenter.eager(:episodes).all.sort_by {|x| -x.episodes.length}
   @page_title = 'Late Junction presenters'
