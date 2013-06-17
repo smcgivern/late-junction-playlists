@@ -13,7 +13,10 @@ end
 
 get '/episode/:slug/' do
   @episode = Episode.by_slug(params['slug'])
-  @page_title = "#{@episode.title_date} - #{@episode.presenter.name}"
+  @page_title = [[@episode.title_date, @episode.uri,
+                  'Original page for this playlist'],
+                 '&#8211;',
+                 [@episode.presenter.name, "/presenter/#{@episode.presenter.slug}/"]]
 
   haml :episode
 end

@@ -1,15 +1,16 @@
 !!!
 %html
   %head
-    %title= @page_title
+    %title= @page_title.map {|x| x.first}.join(' ')
     %link{:href => r('/ext/style.css'), :rel => 'stylesheet',
           :type => 'text/css'}
   %body
     %h1
-      - if @title_link
-        %a{:href => @title_link}= @page_title
-      - else
-        = @page_title
+      - @page_title.each do |segment|
+        - if segment.respond_to?(:last)
+          %a{:href => segment[1], :title => segment[2]}= segment.first
+        - else
+          = segment
     = yield
     %footer#byline
       By
