@@ -61,6 +61,78 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.calendar {
+  margin: 0em auto;
+  border-collapse: collapse;
+
+  caption {
+    border: 1px solid #000;
+    border-bottom: none;
+
+    h3 {
+      margin: 0.2em;
+    }
+  }
+
+  th, td {
+    border: 1px solid #000;
+    margin: 0em;
+  }
+
+  th {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  td {
+    width: 5em;
+    vertical-align: top;
+    padding: 0.2em;
+
+    .date {
+      text-align: right;
+      font-size: 110%;
+      font-weight: bold;
+    }
+
+    .presenter {
+      float: left;
+      font-size: 80%;
+      min-height: 3em;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.mini-calendars {
+  text-align: center;
+
+  .calendar {
+    margin: 0.2em;
+    display: inline-block;
+
+    caption, th, td {
+      border: none;
+    }
+
+    td {
+      width: auto;
+
+      .date {
+        font-size: 100%;
+        font-weight: normal;
+        text-align: center;
+        min-height: 2em;
+      }
+    }
+  }
+}
+
 .colour-0 {
   color: inherit;
   background: #8dd3c7;

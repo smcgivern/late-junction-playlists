@@ -28,3 +28,33 @@ get '/presenter/' do
 
   haml :presenter_list
 end
+
+# Day (not linked; redirects to day's episode if there is one, otherwise month).
+get %r{/(20\d\d)/([01]\d)/([0123]\d)/} do
+  year, month, day = *params[:captures]
+  episode = Episode[:date => Date.new(*[year, month, day].map {|x| x.to_i})]
+
+  redirect r(episode ? "/episode/#{episode.slug}/" : "/#{year}/#{month}/")
+end
+
+# Month (shows calendar for single month).
+get %r{/(20\d\d)/([01]\d)/} do
+  year, month = *params[:captures].map {|x| x.to_i}
+  @range = Date.new(year, month)..Date.new(year, month, -1)
+  @episodes = Episode.where(:date => @range).to_hash(:date)
+  @page_title = "Late Junction episodes for #{@range.first.strftime('%B %Y')}"
+
+  redirect r("/#{year}/") if @episodes.empty?
+
+  haml :month
+end
+
+# Year (shows mini-calendar for all 12 months.
+get %r{/(20\d\d)/} do
+  year = *params[:captures].map {|x| x.to_i}
+  @range = Date.new(year)..Date.new(year, -1, -1)
+  @episodes = Episode.where(:date => @range).to_hash(:date)
+  @page_title = "Late Junction episodes for #{year}"
+
+  haml :year
+end

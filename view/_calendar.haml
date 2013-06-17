@@ -1,0 +1,56 @@
+-# Parameters: first (first day of month); mini (link days and don't
+-# show presenter name, title link goes to calendar page); episodes (hash by
+-# date).
+
+- last = Date.new(first.year, first.month, -1)
+- mini ||= nil
+- episodes = Hash[episodes.select {|d, e| d.between?(first, last)}]
+- offset = first.wday
+- point = 0
+
+%table.calendar
+  - if mini
+    %caption
+      %h3
+        %a{:href => "/#{first.strftime('%Y/%m')}/"}= first.strftime("%B")
+
+  %thead
+    %tr
+      %th
+        %abbr{:title => 'Sunday'} S
+      %th
+        %abbr{:title => 'Monday'} M
+      %th
+        %abbr{:title => 'Tuesday'} T
+      %th
+        %abbr{:title => 'Wednesday'} W
+      %th
+        %abbr{:title => 'Thursday'} T
+      %th
+        %abbr{:title => 'Friday'} F
+      %th
+        %abbr{:title => 'Saturday'} S
+
+  %tbody
+    - 0.upto(5) do |week|
+      %tr
+        - 0.upto(6) do |day|
+          - point = (week * 7) + day
+          - day = first + point - offset
+          - episode = episodes[day]
+          - if episode
+            %td{:class => ["colour-#{episode.presenter.seq}", 'colour']}
+              %a{:href => "/episode/#{episode.slug}/",
+                 :title => episode.presenter.name}
+                .date= day.strftime('%e')
+                - if not mini
+                  .presenter= episode.presenter.name
+          - else
+            %td
+              - if day.between?(first, last)
+                .date= day.strftime('%e')
+                - if not mini
+                  .presenter
+              - elsif mini
+                .date
+      - break if point >= offset + last.day - 1 and not mini
