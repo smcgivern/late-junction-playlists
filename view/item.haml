@@ -1,5 +1,5 @@
 %ol.playlist-tracks
-  - @item.playlist_tracks.each do |pt|
+  - @item.sorted_playlist_tracks.each do |pt|
     %li= haml :_playlist_track, :layout => false,
                 :locals => {:skip => {@item.class.to_s.downcase.to_sym => true},
                             :playlist_track => pt}

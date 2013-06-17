@@ -29,6 +29,12 @@ module Renameable
       other.rename(name)
       rename(new_name)
     end
+
+    def sorted_playlist_tracks
+      key = playlist_tracks.all? {|x| x.played} ? :played : :id
+
+      playlist_tracks.sort_by {|x| x.send(key)}
+    end
   end
 
   module ClassMethods
