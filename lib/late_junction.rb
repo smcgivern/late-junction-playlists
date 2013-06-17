@@ -133,9 +133,9 @@ module LateJunction
         end
 
         if (segments = page.at('#segments'))
+          start_time = date_text['content'].match(/\d\d:\d\d/)[0]
           playlist[:description] = text['#synopsis']
-          playlist[:tracks] = structured_tracks(segments,
-                                                date_text.match(/\d\d:\d\d/)[0])
+          playlist[:tracks] = structured_tracks(segments, start_time)
         else
           playlist[:description] = text['#episode-summary']
           playlist[:tracks] = tracks(source,
