@@ -17,6 +17,7 @@ if SETTINGS['sinatra_log']
 end
 
 DB = Database('production.log')
+DATES = Range.new(*[:min, :max].map {|x| Date.parse(Episode.send(x, :date))})
 
 set :haml, {:format => :html5}
 set :views, "#{File.dirname(__FILE__)}/view"

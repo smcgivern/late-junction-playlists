@@ -1,2 +1,5 @@
+= haml :_prev_next, :layout => false,
+         :locals => {:format => '%Y/%m', :text_format => '%B %Y',
+                     :range => @range}
 = haml :_calendar, :layout => false,
          :locals => {:episodes => @episodes, :first => @range.first}

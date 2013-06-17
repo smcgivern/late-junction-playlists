@@ -1,4 +1,8 @@
+= haml :_prev_next, :layout => false,
+         :locals => {:format => '%Y', :text_format => '%Y', :range => @range}
 .mini-calendars
   - @range.select {|x| x.day == 1}.each do |first|
     = haml :_calendar, :layout => false,
              :locals => {:episodes => @episodes, :mini => true, :first => first}
+= haml :_prev_next, :layout => false,
+         :locals => {:format => '%Y', :text_format => '%Y', :range => @range}
