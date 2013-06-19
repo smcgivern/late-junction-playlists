@@ -13,7 +13,7 @@
     - playlist_track.artists.each do |pta|
       %dd
         %a{:href => r("/artist/#{pta.id}/")}= pta.name
-  - unless skip[:album]
+  - if playlist_track.album.name and not skip[:album]
     %dt Album
     %dd
       %a{:href => r("/album/#{playlist_track.album.id}/")}
