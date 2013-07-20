@@ -12,9 +12,9 @@ end
 
 if SETTINGS['sinatra_log']
   log_file = File.open(SETTINGS['sinatra_log'], 'a')
+  log_file.sync = true
 
-  $stdout.reopen(log_file)
-  $stderr.reopen(log_file)
+  use Rack::CommonLogger, log_file
 end
 
 DB = Database('production.log')
