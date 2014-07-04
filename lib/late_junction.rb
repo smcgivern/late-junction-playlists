@@ -8,7 +8,7 @@ module LateJunction
 
   PRESENTERS = ['Fiona Talkington', 'Verity Sharp', 'Max Reinhardt',
                 'Nick Luscombe', 'Anne Hilde Neset', 'Robert Sandall',
-                'Shaheera Asante', 'Mark Russell']
+                'Shaheera Asante', 'Mark Russell', 'Mara Carlyle']
 
   START_PAGES = {
     :legacy => 'http://www.bbc.co.uk/radio3/latejunction/pip/archive/',
