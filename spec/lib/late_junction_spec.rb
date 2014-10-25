@@ -355,10 +355,17 @@ end
 describe 'LateJunction.structured_tracks' do
   before do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
-      @current = ['b00xfg3p'].
+      static = ['b00xfg3p'].
         map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
         map {|x| LateJunction.html(x).at('#segments') }.
         map {|x| LateJunction.structured_tracks(x, '23:15') }
+
+      dynamic = ['b04l37ph'].
+        map {|x| "http://www.bbc.co.uk/programmes/#{x}/segments.inc"}.
+        map {|x| LateJunction.html(x) }.
+        map {|x| LateJunction.structured_tracks(x, '23:15') }
+
+      @current = static + dynamic
     end
   end
 
@@ -370,7 +377,17 @@ describe 'LateJunction.structured_tracks' do
       :album => 'Excerpts',
     }
 
+    grapes_engraved = {
+      :time => '23:50',
+      :title => 'Grapes Engraved',
+      :artists => ['Part Wild Horses Mane on Both Sides'],
+      :album => 'Bataille De Battle'
+    }
+
     @current[0].length.should.equal 22
     @current[0][-2].should.equal before_night
+
+    @current[1].length.should.equal 17
+    @current[1][6].should.equal grapes_engraved
   end
 end

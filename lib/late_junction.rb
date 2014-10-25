@@ -118,23 +118,34 @@ module LateJunction
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list'), 'iso-8859-1'))
       when :current
-        unless (date_text = page.at('#last-on .details'))
+        unless (date_text = (page.at('#last-on .details, .broadcast-event__time')))
           self.uncache(uri)
 
           next
         end
 
         playlist[:date] = DateTime.strptime(date_text['content'], '%Y-%m-%d')
-        playlist[:title] = text['h1.episode-title']
+
+        if playlist[:date] > DateTime.now
+          self.uncache(uri)
+
+          next
+        end
+
+        playlist[:title] = text['h1.episode-title, h1[property=name]']
         playlist[:presenter] = presenter(playlist[:title])
 
         if playlist[:presenter].empty?
-          playlist[:presenter] = presenter(text['#synopsis'])
+          playlist[:presenter] = presenter(text['#synopsis, .ml__content.prose'])
         end
 
-        if (segments = page.at('#segments'))
+        if lazy = page.at('.lazy-module')
+          segments = html(URI.join(uri, lazy['data-lazyload-inc']).to_s)
+        end
+
+        if (segments ||= page.at('#segments'))
           start_time = date_text['content'].match(/\d\d:\d\d/)[0]
-          playlist[:description] = text['#synopsis']
+          playlist[:description] = text['#synopsis, .ml__content.prose']
           playlist[:tracks] = structured_tracks(segments, start_time)
         else
           playlist[:description] = text['#episode-summary']
@@ -207,17 +218,19 @@ module LateJunction
   end
 
   def self.structured_tracks(segments, start_time)
-    segments.css('li.segment.track').map do |segment|
+    segments.css('li.segment.track, .segment__track').map do |segment|
       text = inner_text(segment)
-      play_time = text['.play-time']
+      play_time = text['.play-time, .text--subtle.pull--right-spaced']
 
       next unless (artists = text['.artist'])
+
+      album = text['.release-title, .inline em']
 
       {
         :time => play_time && add_time(start_time, play_time),
         :artists => artists.split(/ *\/ */),
-        :title => text['.title'],
-        :album => text['.release-title'],
+        :title => text['.title, p[property=name]'],
+        :album => album && album.gsub(/\W+$/, ''),
       }
     end
   end
