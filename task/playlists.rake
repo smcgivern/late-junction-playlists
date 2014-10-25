@@ -23,7 +23,7 @@ task :new_playlists do
   require './lib/late_junction'
 
   LateJunction.episodes(:current, nil, :force)
-  Rake::Task[:playlists].invoke(:current, '2012')
+  Rake::Task[:playlists].invoke(:current, '2014')
 end
 
 desc 'Update DB using the new playlists'
