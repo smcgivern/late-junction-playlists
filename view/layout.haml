@@ -9,7 +9,7 @@
     %h1
       - Array(@page_title).each do |segment|
         - if segment.respond_to?(:last)
-          %a{:href => segment[1], :title => segment[2]}= segment.first
+          %a{:href => r(segment[1]), :title => segment[2]}= segment.first
         - else
           = segment
     %nav
