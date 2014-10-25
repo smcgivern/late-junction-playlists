@@ -1,4 +1,4 @@
-require 'setup'
+require './setup'
 
 get '/ext/style.css' do
   scss :style
@@ -72,7 +72,7 @@ end
 
 # Year (shows mini-calendar for all 12 months.
 get %r{/(20\d\d)/} do
-  year = *params[:captures].map {|x| x.to_i}
+  year, _ = *params[:captures].map {|x| x.to_i}
   @range = Date.new(year)..Date.new(year, -1, -1)
   @episodes = Episode.where(:date => @range).to_hash(:date)
   @page_title = "Late Junction episodes for #{year}"

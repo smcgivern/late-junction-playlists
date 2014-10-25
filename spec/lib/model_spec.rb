@@ -3,7 +3,7 @@ require './lib/model'
 
 DB = Sequel.sqlite
 
-Dir['./model/*.rb'].each {|m| require m}
+Dir['./model/*.rb'].each {|m| require "./#{m}"}
 
 describe 'model_constant' do
   it 'should return the model class / constant from a table name' do

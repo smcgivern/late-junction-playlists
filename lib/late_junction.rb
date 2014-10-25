@@ -60,12 +60,12 @@ module LateJunction
     Nokogiri::HTML(page)
   end
 
-  def self.html_to_text(html)
+  def self.html_to_text(html, encoding='utf-8')
     return '' unless html
 
     line_breaks = /<\/?(br|p|div|h[1-6]).*?>/
 
-    Nokogiri::HTML(html.inner_html.gsub(line_breaks, "\n")).inner_text
+    Nokogiri::HTML(html.inner_html.force_encoding(encoding).gsub(line_breaks, "\n")).inner_text
   end
 
   def self.inner_text(root)
@@ -116,7 +116,7 @@ module LateJunction
           playlist[:presenter] = presenter(playlist[:description])
         end
 
-        playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list')))
+        playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list'), 'iso-8859-1'))
       when :current
         unless (date_text = page.at('#last-on .details'))
           self.uncache(uri)
@@ -154,7 +154,7 @@ module LateJunction
   def self.tracks(source, text, time=nil)
     parsed_tracks = []
 
-    text.reduce([[]]) do |groups, line|
+    text.split("\n").reduce([[]]) do |groups, line|
       stripped = line.gsub("\302\240", ' ').strip
 
       stripped.empty? ? groups << [] : groups.last << stripped

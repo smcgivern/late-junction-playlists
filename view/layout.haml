@@ -1,13 +1,13 @@
 !!!
 %html
   %head
-    %title= @page_title.map {|x| x.first}.join(' ')
+    %title= Array(@page_title).map {|x| Array(x).first}.join(' ')
     %link{:href => r('/ext/style.css'), :rel => 'stylesheet',
           :type => 'text/css'}
     %link{:href => r('/ext/app-icon.png'), :rel => 'apple-touch-icon'}
   %body
     %h1
-      - @page_title.each do |segment|
+      - Array(@page_title).each do |segment|
         - if segment.respond_to?(:last)
           %a{:href => segment[1], :title => segment[2]}= segment.first
         - else

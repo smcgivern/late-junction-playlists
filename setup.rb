@@ -4,7 +4,9 @@ require 'kramdown'
 require 'sass'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'schema'
+require './schema'
+
+Encoding.default_external = Encoding::UTF_8
 
 unless defined? SETTINGS
   SETTINGS = JSON.parse(open('settings.json').read)

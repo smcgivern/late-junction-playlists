@@ -1,7 +1,7 @@
 desc "Populate database from JSON; files named 'manual' will load playlist only"
 task :populate_db, :file do |t, args|
   require 'json'
-  require 'schema'
+  require './schema'
 
   file = args[:file]
   manual = file.include?('manual')

@@ -291,7 +291,7 @@ describe 'LateJunction.tracks' do
       @legacy = ['9eaog', '440gl', 'uk1se'].
         map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
         map {|x| LateJunction.html(x)}.
-        map {|x| LateJunction.html_to_text(x.at('#play-list')) }.
+        map {|x| LateJunction.html_to_text(x.at('#play-list'), 'iso-8859-1') }.
         map {|x| LateJunction.tracks(:legacy, x) }
 
       @current = ['b00q90qy', 'b00q90wq'].

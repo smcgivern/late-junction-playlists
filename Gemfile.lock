@@ -3,7 +3,12 @@ GEM
   specs:
     backports (3.3.1)
     bacon (1.2.0)
+    byebug (3.1.2)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+    columnize (0.8.9)
     daemons (1.1.9)
+    debugger-linecache (1.2.0)
     eventmachine (1.0.3)
     haml (4.0.3)
       tilt
@@ -15,6 +20,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.2.2)
     sass (3.2.9)
     sequel (3.48.0)
     sinatra (1.4.3)
@@ -40,10 +46,12 @@ PLATFORMS
 
 DEPENDENCIES
   bacon
+  byebug
   haml
   json
   kramdown
   nokogiri (~> 1.5.0)
+  rake
   sass
   sequel
   sinatra

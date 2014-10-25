@@ -1,5 +1,5 @@
-require 'model/artist'
-require 'model/playlist_track'
+require './model/artist'
+require './model/playlist_track'
 
 class ArtistsPlaylistTrack < Sequel::Model
   set_schema do

@@ -1,5 +1,5 @@
 require 'logger'
-require 'lib/model'
+require './lib/model'
 
 def Database(log_file=nil, database_file='tmp/late_junction.db', level=:debug)
   log_to = (log_file ? "tmp/log/#{log_file}" : $stdout)
@@ -8,7 +8,7 @@ def Database(log_file=nil, database_file='tmp/late_junction.db', level=:debug)
 
   db = Sequel.sqlite(database_file, :logger => Logger.new(log_to))
 
-  Dir['model/*.rb'].each {|m| require m}
+  Dir['model/*.rb'].each {|m| require "./#{m}"}
 
   db
 end
