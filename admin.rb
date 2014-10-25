@@ -3,7 +3,7 @@ require 'json'
 require 'sass'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'schema'
+require './schema'
 
 DB = Database('admin.log')
 LOGS = Hash[[:edit_date, :edit_presenter, :rename, :swap].

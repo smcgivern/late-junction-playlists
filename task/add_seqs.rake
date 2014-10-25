@@ -1,6 +1,6 @@
 desc 'Add stable sequence IDs to presenters, for assigning colours later'
 task :add_seqs do
-  require 'schema'
+  require './schema'
 
   DB = Database('rake.log')
 

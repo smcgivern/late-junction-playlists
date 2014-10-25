@@ -1,7 +1,7 @@
 desc 'Dump playlist text for episodes missing playlists'
 task :missing_playlists do
-  require 'schema'
-  require 'lib/late_junction'
+  require './schema'
+  require './lib/late_junction'
 
   DB = Database('rake.log')
   dir = "tmp/manual/#{Time.now.strftime('%F-%T')}"

@@ -1,7 +1,7 @@
 desc 'Add presenters from the whole episode text, where a presenter is missing'
 task :add_presenters do
   require './schema'
-  require 'lib/late_junction'
+  require './lib/late_junction'
   DB = Database('rake.log')
 
   Episode.

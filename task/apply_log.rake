@@ -1,6 +1,6 @@
 desc 'Apply admin modifications log to database'
 task :apply_log, :file do |t, args|
-  require 'schema'
+  require './schema'
   DB = Database('rake.log')
 
   open(args[:file]).each do |line|

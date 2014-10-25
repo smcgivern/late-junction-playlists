@@ -1,6 +1,6 @@
 desc 'Pull all playlists from source, leaving info as JSON in tmp/'
 task :playlists, :source, :since do |t, args|
-  require 'lib/late_junction'
+  require './lib/late_junction'
   require 'json'
 
   args.with_defaults(:source => 'legacy', :since => '')
@@ -20,7 +20,7 @@ end
 
 desc 'Get new playlists (current only) since last update'
 task :new_playlists do
-  require 'lib/late_junction'
+  require './lib/late_junction'
 
   LateJunction.episodes(:current, nil, :force)
   Rake::Task[:playlists].invoke(:current, '2012')

@@ -1,7 +1,7 @@
 desc 'Fix playlist tracks with times that should be from episode start'
 task :fix_times => [:backup_db] do
-  require 'lib/late_junction'
-  require 'schema'
+  require './lib/late_junction'
+  require './schema'
 
   DB = Database('rake.log')
 

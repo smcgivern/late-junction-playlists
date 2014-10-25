@@ -1,6 +1,6 @@
 desc "Rename artists and / or albums that start with 'taken from'"
 task :rename, :type do |t, args|
-  require 'schema'
+  require './schema'
   DB = Database('rake.log')
 
   args.with_defaults(:type => :both)

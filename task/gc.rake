@@ -1,6 +1,6 @@
 desc 'Remove all items which have no associations'
 task :gc do
-  require 'schema'
+  require './schema'
   DB = Database('rake.log')
 
   DB[Episode.table_name].
