@@ -118,7 +118,9 @@ module LateJunction
 
         playlist[:tracks] = tracks(source, html_to_text(page.at('#play-list'), 'iso-8859-1'))
       when :current
-        unless (date_text = (page.at('#last-on .details, .broadcast-event__time')))
+        unless (date_text = (page.at('#last-on .details, .broadcast-event__time'))) &&
+               date_text['content']
+
           self.uncache(uri)
 
           next
