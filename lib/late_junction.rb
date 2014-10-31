@@ -154,6 +154,12 @@ module LateJunction
           playlist[:tracks] = tracks(source,
                                      page.at('#synopsis .copy')['content'])
         end
+
+        if playlist[:tracks].empty? || !playlist[:presenter]
+          self.uncache(uri)
+
+          next
+        end
       end
 
       playlist
@@ -161,7 +167,7 @@ module LateJunction
   end
 
   def self.presenter(text)
-    text.match(/(#{PRESENTERS.join('|')})/).to_s
+    text && text.match(/(#{PRESENTERS.join('|')})/).to_s
   end
 
   def self.tracks(source, text, time=nil)
