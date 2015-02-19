@@ -6,6 +6,7 @@ task :playlists, :source, :since do |t, args|
   args.with_defaults(:source => 'legacy', :since => '')
 
   filename = "tmp/#{args[:source]}-#{Time.now.strftime('%F-%T')}.json"
+  LateJunction.indices(args[:source].to_sym, nil, true)
   playlists = LateJunction.playlists(args[:source].to_sym).
     select {|x| x && x[:date].to_s >= args[:since]}
 

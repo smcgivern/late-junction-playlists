@@ -12,7 +12,7 @@ module LateJunction
 
   START_PAGES = {
     :legacy => 'http://www.bbc.co.uk/radio3/latejunction/pip/archive/',
-    :current => 'http://www.bbc.co.uk/programmes/b006tp52/broadcasts',
+    :current => 'http://www.bbc.co.uk/programmes/b006tp52/episodes/guide',
   }
 
   def self.add_time(a, b)
@@ -80,7 +80,10 @@ module LateJunction
     when :legacy
       return page.xpath('//a[starts-with(@href, "?")]').map(&absolute(uri)).uniq
     when :current
-      return page.css('.months li a').map(&absolute(uri)).uniq
+      last = page.at('.pagination__page--last a')
+      last_index = last.inner_text.strip.to_i
+
+      return (1..last_index).map {|i| {'href' => last['href'].gsub(/#{last_index}$/, i.to_s)}}.map(&absolute(uri))
     end
   end
 
@@ -94,7 +97,7 @@ module LateJunction
       when :legacy
         page.css('div.month li a')
       when :current
-        page.css('#broadcast-items h4 a')
+        page.css('#programmes-main-content .programme__titles a')
       end.map(&absolute(uri))
     end.flatten.uniq
   end

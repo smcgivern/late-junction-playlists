@@ -180,8 +180,8 @@ describe 'LateJunction.indices' do
       legacy.length.should.equal 1
       legacy.first[-4..-1].should.equal '2004'
 
-      current.length.should.equal 1
-      current.first[-7..-1].should.equal '2010/01'
+      current.length.should.equal 2
+      current.first[-7..-1].should.equal '?page=1'
     end
 
     it 'should use the URI passed, if any' do
@@ -196,19 +196,19 @@ describe 'LateJunction.episodes' do
     it 'should find all episodes on the pages passed' do
       bbc = 'http://www.bbc.co.uk'
       legacy_uris = [2004, 2005].map {|x| "#{bbc}/pips/#{x}/"}
-      current_uris = ["#{bbc}/programmes/b006tp52/broadcasts/2011/01"]
+      current_uris = ["#{bbc}/programmes/b006tp52/episodes-guide-page-1"]
       legacy = LateJunction.episodes(:legacy, legacy_uris)
       current = LateJunction.episodes(:current, current_uris)
 
       legacy.length.should.equal 286
       legacy.first[-5..-1].should.equal 'uoj0a'
-      current.length.should.equal 4
-      current.first[-8..-1].should.equal 'b00xfhrt'
+      current.length.should.equal 3
+      current.first[-8..-1].should.equal 'b00xfg3p'
     end
 
     it 'should pull indices if no uris passed' do
       LateJunction.episodes(:legacy).length.should.equal 2
-      LateJunction.episodes(:current).length.should.equal 2
+      LateJunction.episodes(:current).length.should.equal 3
     end
   end
 end
@@ -226,8 +226,8 @@ describe 'LateJunction.playlists' do
       @legacy[1][:tracks][-5][:title].should.equal 'Silent Night'
       @legacy[1][:presenter].should.equal 'Fiona Talkington'
 
-      @current.length.should.equal 2
-      @current[1][:presenter].should.equal 'Max Reinhardt'
+      @current.length.should.equal 3
+      @current[1][:presenter].should.equal 'Fiona Talkington'
     end
 
     it 'should bail on metadata if the episode has no structured information' do
@@ -257,7 +257,7 @@ describe 'LateJunction.playlists' do
 
     it 'should uncache any future episodes' do
       dir = Dir.mktmpdir
-      uri = 'http://www.bbc.co.uk/programmes/b02x995v'
+      uri = 'http://www.bbc.co.uk/programmes/b00xfhrt'
       filename = LateJunction.cache_filename(uri)
 
       with_const(LateJunction::CACHE_DIRECTORY, dir) do
