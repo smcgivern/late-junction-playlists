@@ -144,7 +144,7 @@ module LateJunction
           playlist[:presenter] = presenter(text['#synopsis, .ml__content.prose'])
         end
 
-        if lazy = page.at('.lazy-module')
+        if lazy = page.at('#segments.lazy-module')
           segments = html(URI.join(uri, lazy['data-lazyload-inc']).to_s)
         end
 
