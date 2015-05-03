@@ -152,10 +152,13 @@ module LateJunction
           start_time = date_text['content'].match(/\d\d:\d\d/)[0]
           playlist[:description] = text['#synopsis, .ml__content.prose']
           playlist[:tracks] = structured_tracks(segments, start_time)
-        else
+        elsif page.at('#synopsis .copy')
           playlist[:description] = text['#episode-summary']
           playlist[:tracks] = tracks(source,
                                      page.at('#synopsis .copy')['content'])
+        else
+          self.uncache(uri)
+          next
         end
 
         if playlist[:tracks].empty? || !playlist[:presenter]
