@@ -11,8 +11,8 @@ module LateJunction
                 'Shaheera Asante', 'Mark Russell', 'Mara Carlyle']
 
   START_PAGES = {
-    :legacy => 'http://www.bbc.co.uk/radio3/latejunction/pip/archive/',
-    :current => 'http://www.bbc.co.uk/programmes/b006tp52/episodes/guide',
+    :legacy => 'https://www.bbc.co.uk/radio3/latejunction/pip/archive/',
+    :current => 'https://www.bbc.co.uk/programmes/b006tp52/episodes/guide',
   }
 
   def self.add_time(a, b)

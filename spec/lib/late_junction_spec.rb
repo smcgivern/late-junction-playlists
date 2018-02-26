@@ -185,7 +185,7 @@ describe 'LateJunction.indices' do
     end
 
     it 'should use the URI passed, if any' do
-      LateJunction.indices(:legacy, 'http://www.bbc.co.uk/pips/').length.
+      LateJunction.indices(:legacy, 'https://www.bbc.co.uk/pips/').length.
         should.equal 5
     end
   end
@@ -194,7 +194,7 @@ end
 describe 'LateJunction.episodes' do
   with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
     it 'should find all episodes on the pages passed' do
-      bbc = 'http://www.bbc.co.uk'
+      bbc = 'https://www.bbc.co.uk'
       legacy_uris = [2004, 2005].map {|x| "#{bbc}/pips/#{x}/"}
       current_uris = ["#{bbc}/programmes/b006tp52/episodes-guide-page-1"]
       legacy = LateJunction.episodes(:legacy, legacy_uris)
@@ -236,20 +236,20 @@ describe 'LateJunction.playlists' do
       end
 
       @legacy[0][:uri].
-        should.equal 'http://www.bbc.co.uk/radio3/latejunction/pip/440gl'
+        should.equal 'https://www.bbc.co.uk/radio3/latejunction/pip/440gl'
     end
 
     it "should bail on the playlist if there isn't one" do
       playlist = LateJunction.
         playlists(:legacy,
-                  ['http://www.bbc.co.uk/radio3/latejunction/pip/0ej1z'])[0]
+                  ['https://www.bbc.co.uk/radio3/latejunction/pip/0ej1z'])[0]
 
       playlist[:date].should.equal DateTime.civil(2006, 9, 29)
       playlist[:tracks].should.equal []
     end
 
     it 'should pull episodes by URI' do
-      uris = ['http://www.bbc.co.uk/radio3/latejunction/pip/9eaog']
+      uris = ['https://www.bbc.co.uk/radio3/latejunction/pip/9eaog']
 
       LateJunction.playlists(:legacy, uris)[0].
         should.equal @legacy[1]
@@ -257,7 +257,7 @@ describe 'LateJunction.playlists' do
 
     it 'should uncache any future episodes' do
       dir = Dir.mktmpdir
-      uri = 'http://www.bbc.co.uk/programmes/b00xfhrt'
+      uri = 'https://www.bbc.co.uk/programmes/b00xfhrt'
       filename = LateJunction.cache_filename(uri)
 
       with_const(LateJunction::CACHE_DIRECTORY, dir) do
@@ -289,13 +289,13 @@ describe 'LateJunction.tracks' do
   before do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
       @legacy = ['9eaog', '440gl', 'uk1se'].
-        map {|x| "http://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
+        map {|x| "https://www.bbc.co.uk/radio3/latejunction/pip/#{x}"}.
         map {|x| LateJunction.html(x)}.
         map {|x| LateJunction.html_to_text(x.at('#play-list'), 'iso-8859-1') }.
         map {|x| LateJunction.tracks(:legacy, x) }
 
       @current = ['b00q90qy', 'b00q90wq'].
-        map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
+        map {|x| "https://www.bbc.co.uk/programmes/#{x}"}.
         map {|x| LateJunction.html(x)}.
         map {|x| x.at('#synopsis .copy')['content'] }.
         map {|x| LateJunction.tracks(:current, x) }
@@ -356,12 +356,12 @@ describe 'LateJunction.structured_tracks' do
   before do
     with_const(LateJunction::CACHE_DIRECTORY, 'spec/fixture') do
       static = ['b00xfg3p'].
-        map {|x| "http://www.bbc.co.uk/programmes/#{x}"}.
+        map {|x| "https://www.bbc.co.uk/programmes/#{x}"}.
         map {|x| LateJunction.html(x).at('#segments') }.
         map {|x| LateJunction.structured_tracks(x, '23:15') }
 
       dynamic = ['b04l37ph'].
-        map {|x| "http://www.bbc.co.uk/programmes/#{x}/segments.inc"}.
+        map {|x| "https://www.bbc.co.uk/programmes/#{x}/segments.inc"}.
         map {|x| LateJunction.html(x) }.
         map {|x| LateJunction.structured_tracks(x, '23:15') }
 
