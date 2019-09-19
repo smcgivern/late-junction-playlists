@@ -9,14 +9,15 @@ GEM
     columnize (0.8.9)
     daemons (1.1.9)
     debugger-linecache (1.2.0)
-    eventmachine (1.0.3)
+    eventmachine (1.2.7)
     haml (4.0.3)
       tilt
-    json (1.8.0)
     kramdown (0.14.0)
-    nokogiri (1.5.10)
-    rack (1.5.2)
-    rack-protection (1.5.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
+    rack (1.6.11)
+    rack-protection (1.5.5)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -48,13 +49,15 @@ DEPENDENCIES
   bacon
   byebug
   haml
-  json
   kramdown
-  nokogiri (~> 1.5.0)
+  nokogiri (~> 1.10.0)
   rake
   sass
   sequel
-  sinatra
+  sinatra (~> 1.4)
   sinatra-contrib
   sqlite3-ruby (= 1.2.5)
   thin
+
+BUNDLED WITH
+   1.17.2
