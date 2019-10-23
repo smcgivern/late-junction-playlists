@@ -10,7 +10,7 @@ GEM
     daemons (1.1.9)
     debugger-linecache (1.2.0)
     eventmachine (1.2.7)
-    haml (5.0.0)
+    haml (5.1.2)
       temple (>= 0.8.0)
       tilt
     kramdown (0.14.0)
