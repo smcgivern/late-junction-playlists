@@ -1,6 +1,0 @@
-%ol
-  - @episodes.each do |episode|
-    %li
-      %a{:href => "/episode/#{episode.slug}/"}><
-        #{episode.id} - #{episode.date} - #{episode.presenter.name}
-      \: #{episode.playlist_tracks.length}

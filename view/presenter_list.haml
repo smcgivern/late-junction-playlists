@@ -1,8 +1,0 @@
-%ul.presenter-list
-  - @presenters.each do |presenter|
-    %li{:class => ["colour-#{presenter.seq}", 'colour']}
-      %a{:href => r("/presenter/#{presenter.slug}/")}
-        %h3= presenter.name
-        %p
-          = presenter.episodes.length
-          episodes

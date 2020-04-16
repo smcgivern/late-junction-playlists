@@ -1,5 +1,0 @@
-.mini-calendars
-  - @range.select {|x| x.day == 1}.each do |first|
-    = haml :_calendar, :layout => false,
-             :locals => {:episodes => @episodes, :mini => true, :first => first,
-                         :format => '%B %y'}

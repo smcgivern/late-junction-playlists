@@ -1,5 +1,0 @@
-%ol
-  - @items.each do |item|
-    %li
-      %a{:href => "/#{item.class.table_name.to_s.gsub(/s$/, '')}/#{item.id}/"}
-        #{item.name} [#{item.id}]
