@@ -1,0 +1,177 @@
+body, input, select {
+  font-family: "Palatino Linotype", "Palatino", "URW Palladio L", "Book Antiqua", "Baskerville", "Bitstream Charter", "Garamond", "Georgia", serif;
+  color: #000;
+  background: #fff; }
+
+body {
+  font-size: 105%;
+  margin: 0em auto;
+  padding: 0em 1em;
+  max-width: 50em;
+  line-height: 1.6; }
+
+input, select {
+  font-size: 100%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Gill Sans", "Gill Sans MT", "GillSans", "Calibri", "Trebuchet MS", sans-serif;
+  font-weight: normal;
+  text-align: center;
+  clear: both; }
+
+:link, :link:active, :link:hover, .click {
+  color: #0000ff;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline; }
+
+:link:visited {
+  color: #800080;
+  background: transparent; }
+
+nav {
+  text-align: center; }
+  nav ul {
+    list-style: none;
+    padding-left: 0em; }
+    nav ul li {
+      display: inline; }
+
+.colour :link, .colour :link:active, .colour :link:hover, .colour :link:visited, .colour .click {
+  text-decoration: none; }
+
+.presenter-list {
+  list-style: none;
+  text-align: center;
+  padding: 0em;
+  margin: 0em; }
+  .presenter-list li {
+    width: 12em;
+    margin: 0.2em 0.1em;
+    display: inline-block; }
+    .presenter-list li h3, .presenter-list li p {
+      margin: 0.5em; }
+
+.calendar {
+  margin: 0em auto;
+  border-collapse: collapse; }
+  .calendar caption {
+    border: 1px solid #000;
+    border-bottom: none; }
+    .calendar caption h3 {
+      margin: 0.2em; }
+  .calendar th, .calendar td {
+    border: 1px solid #000;
+    margin: 0em; }
+  .calendar th {
+    text-align: center;
+    font-weight: bold; }
+  .calendar td {
+    width: 5em;
+    vertical-align: top;
+    padding: 0.2em; }
+    .calendar td .date {
+      text-align: right;
+      font-size: 110%;
+      font-weight: bold; }
+    .calendar td .presenter {
+      float: left;
+      font-size: 80%;
+      min-height: 3em; }
+    .calendar td a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+
+.mini-calendars {
+  text-align: center; }
+  .mini-calendars .calendar {
+    margin: 0.2em;
+    display: inline-block; }
+    .mini-calendars .calendar caption, .mini-calendars .calendar th, .mini-calendars .calendar td {
+      border: none; }
+    .mini-calendars .calendar td {
+      width: auto; }
+      .mini-calendars .calendar td .date {
+        font-size: 100%;
+        font-weight: normal;
+        text-align: center;
+        min-height: 2em; }
+
+.prev-next {
+  text-align: center; }
+
+dl.playlist-track {
+  width: 30em;
+  margin: 2em auto;
+  border: 1px solid black;
+  padding: 0.1em; }
+  dl.playlist-track dt, dl.playlist-track dd {
+    padding: 0em 1em 0em 0em; }
+  dl.playlist-track dt {
+    width: 5em;
+    margin: 0em;
+    float: left;
+    clear: left;
+    font-weight: bold; }
+  dl.playlist-track dd {
+    width: 22em;
+    margin: 0em 0em 0em 6em;
+    clear: none; }
+
+ol.playlist-tracks li {
+  list-style-type: none; }
+
+.colour-0 {
+  color: inherit;
+  background: #8dd3c7; }
+
+.colour-1 {
+  color: inherit;
+  background: #ffffbc; }
+
+.colour-2 {
+  color: inherit;
+  background: #bebada; }
+
+.colour-3 {
+  color: inherit;
+  background: #fb8072; }
+
+.colour-4 {
+  color: inherit;
+  background: #80b1d3; }
+
+.colour-5 {
+  color: inherit;
+  background: #fdb462; }
+
+.colour-6 {
+  color: inherit;
+  background: #b3de69; }
+
+.colour-7 {
+  color: inherit;
+  background: #fccde5; }
+
+.colour-8 {
+  color: inherit;
+  background: #d9d9d9; }
+
+.colour-9 {
+  color: inherit;
+  background: #bc80bd; }
+
+.colour-10 {
+  color: inherit;
+  background: #ccebc5; }
+
+.colour-11 {
+  color: inherit;
+  background: #ffed6f; }
+
+#byline {
+  clear: both;
+  text-align: right;
+  font-size: 75%;
+  font-style: italic; }

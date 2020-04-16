@@ -1,4 +1,2 @@
-.sass-cache/
-tmp/
-task/_*
-settings.json
+public/*.csv
+Makefile
